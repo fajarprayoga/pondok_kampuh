@@ -70,6 +70,15 @@
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{route('auth.logout')}}" class="nav-link {{ Request::routeIs('category.index') ? 'active' : '' }}">
+                <i class="fas fa-sign-out-alt" style="color: #94b4a4;margin-right: 10px"></i>
+                <p>
+                  Log Out
+                  {{--  <span class="right badge badge-danger">New</span>  --}}
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->

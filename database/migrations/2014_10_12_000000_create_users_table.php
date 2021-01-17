@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 13);
-            $table->string('image');
+            // $table->string('image');
             $table->string('address');
             $table->string('password');
             $table->enum('status',['ACTIVE', 'NONACTIVE']);

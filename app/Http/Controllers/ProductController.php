@@ -107,7 +107,7 @@ class ProductController extends Controller
             "name" => $request->name,
             "category" => $request->category,
             "price" => $request->price,
-            'stock' => $request->stock,
+            'stock' => ($request->S + $request->M + $request->L + $request->XL + $request->AllSize ),
             "description" => $request->description,
             "slug" => Str::slug($request->name),
             'status' => $request->status,
