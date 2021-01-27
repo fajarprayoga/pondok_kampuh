@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -35,13 +36,16 @@ Route::post('login-process',[ AuthController::class, 'loginAction'])->name('auth
 Route::get('register',[ AuthController::class, 'register'])->name('auth.register');
 Route::post('register-process',[ AuthController::class, 'registerAction'])->name('auth.registerAction');
 
+Route::get('home',[ HomeController::class, 'index'])->name('home');
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', function () {
         return view('dashboard.index');
     });
     
     Route::resource('user', UserController::class)->names([
-        'index' => 'user.index'
+        'index' => 'user.index',
+        'update' => 'user.update'
     ]);
     
     Route::resource('product', ProductController::class)->names([

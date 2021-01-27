@@ -13,7 +13,7 @@
             <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Admin</a>
+            <a href="#" class="d-block">{{Auth::user()->name}}</a>
           </div>
         </div>
   
@@ -35,7 +35,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="" class="nav-link" >
+              <a href="" class="nav-link " >
                 <i class="fas fa-tachometer-alt" style="color:#7579e7; margin-right: 10px"></i>
                 <p>
                   Dashboard
@@ -44,7 +44,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('user.index')}}" class="nav-link">
+              <a href="{{route('user.index')}}" class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}" >
                 <i class="fas fa-users" style="color: orange; margin-right: 10px"></i>
                 <p>
                   User
@@ -71,7 +71,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('auth.logout')}}" class="nav-link {{ Request::routeIs('category.index') ? 'active' : '' }}">
+              <a href="{{route('auth.logout')}}" class="nav-link ">
                 <i class="fas fa-sign-out-alt" style="color: #94b4a4;margin-right: 10px"></i>
                 <p>
                   Log Out
