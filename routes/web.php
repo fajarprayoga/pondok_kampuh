@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PondokKampuhController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -36,7 +36,8 @@ Route::post('login-process',[ AuthController::class, 'loginAction'])->name('auth
 Route::get('register',[ AuthController::class, 'register'])->name('auth.register');
 Route::post('register-process',[ AuthController::class, 'registerAction'])->name('auth.registerAction');
 
-Route::get('home',[ HomeController::class, 'index'])->name('home');
+Route::get('home',[ PondokKampuhController::class, 'home'])->name('home');
+Route::get('home/produk/{slug}',[ PondokKampuhController::class, 'produk'])->name('produk');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', function () {

@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $product = Product::all();
         $category = Category::all();
-        return view('product.index', ['categories' => $category, 'products' => $product, 'rupiah' => rupiah()]);
+        return view('product.index', ['categories' => $category, 'products' => $product]);
         // return dd($product);
     }
 
