@@ -1,8 +1,15 @@
 @extends('pondok_kampuh/global')
 @section('content')
       <!-- Home -->
-
       <div class="home">
+            <div class="col-12" style="padding:10px">
+                  @if ($message = Session::get('success'))
+                  <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <strong>{{$message}}</strong>
+                  </div>
+                  @endif
+            </div>
             <!-- Home Slider -->
             <div class="home_slider_container">
                   <div class="owl-carousel owl-theme home_slider">
@@ -338,4 +345,7 @@
                   </div>
             </div>
       </div>  --}}
+@endsection
+@section('footer')
+      <script src="{{asset('ui-toko/js/custom.js')}}"></script>
 @endsection

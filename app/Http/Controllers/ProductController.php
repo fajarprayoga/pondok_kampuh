@@ -31,7 +31,8 @@ class ProductController extends Controller
             'category' => 'required',
             'price' => 'required',
             'status' => 'required',
-            'stock' => 'required',
+            // 'stock' => 'required',
+            'weight' => 'required',
             'description' => 'required|min:10|max:1000',
             'image' => 'required'
         ]);
@@ -42,7 +43,8 @@ class ProductController extends Controller
             'category_id' => $request->category,
             'price' => $request->price,
             'status' => $request->status,
-            'stock' => $request->stock,
+            'stock' => ($request->S + $request->M + $request->L + $request->XL + $request->AllSize ),
+            'weight' => $request->weight,
             'description' => $request->description,
         ]);
 
@@ -98,7 +100,8 @@ class ProductController extends Controller
             'category' => 'required',
             'price' => 'required',
             'status' => 'required',
-            'stock' => 'required',
+            // 'stock' => 'required',
+            'weight' => 'required',
             'description' => 'required|min:10|max:1000',
             // 'image' => 'required' 
         ]);
@@ -108,6 +111,7 @@ class ProductController extends Controller
             "category" => $request->category,
             "price" => $request->price,
             'stock' => ($request->S + $request->M + $request->L + $request->XL + $request->AllSize ),
+            'weight' => $request->weight,
             "description" => $request->description,
             "slug" => Str::slug($request->name),
             'status' => $request->status,

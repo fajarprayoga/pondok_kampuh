@@ -20,7 +20,13 @@
 <!-- Menu -->
 
 <div class="menu">
-
+	<?php $cart = session()->get('cart'); $total = 0;?>
+	@if (!empty($cart))
+		@foreach ($cart as $item)
+			<?php $total++?>
+		@endforeach
+	@endif
+	
 	<!-- Search -->
 	<div class="menu_search">
 		<form action="#" id="menu_search_form" class="menu_search_form">
@@ -34,7 +40,7 @@
 			<li><a href="#">Women</a></li>
 			<li><a href="#">Men</a></li>
 			<li><a href="#">Kids</a></li>
-			<li><a href="#">Home Deco</a></li>
+			<li><a href="{{route('home')}}">Home Deco</a></li>
 			<li><a href="#">Contact</a></li>
 		</ul>
 	</div>
@@ -59,7 +65,7 @@
 
 	<!-- Header -->
 
-	<header class="header" id="header">
+	<header class="header">
 		<div class="header_overlay"></div>
 		<div class="header_content d-flex flex-row align-items-center justify-content-start">
 			<div class="logo">
@@ -90,7 +96,7 @@
 				<!-- User -->
 				<div class="user"><a href="#"><div><img src="{{asset('ui-toko/images/user.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
 				<!-- Cart -->
-				<div class="cart"><a href="cart.html"><div><img class="svg" src="{{asset('ui-toko/images/cart.svg')}}" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
+				<div class="user"><a href="{{route('cart')}}"><div><img class="svg" src="{{asset('ui-toko/images/cart.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>{{$total}}</div></div></a></div>
 				<!-- Phone -->
 				<div class="header_phone d-flex flex-row align-items-center justify-content-start">
 					<div><div><img src="{{asset('ui-toko/images/phone.svg')}}" alt="https://www.flaticon.com/authors/freepik"></div></div>
@@ -183,7 +189,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</footer>
 	</div>
-		
 </div>
 
 <script src="{{asset('ui-toko/js/jquery-3.2.1.min.js')}}"></script>
@@ -196,9 +201,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{asset('ui-toko/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
 <script src="{{asset('ui-toko/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{asset('ui-toko/plugins/easing/easing.js')}}"></script>
-<script src="{{asset('ui-toko/plugins/progressbar/progressbar.min.js')}}"></script>
 <script src="{{asset('ui-toko/plugins/parallax-js-master/parallax.min.js')}}"></script>
-<script src="{{asset('ui-toko/js/custom.js')}}"></script>
+<script src="{{asset('ui-toko/plugins/autoNumeric/autoNumeric.js')}}"></script>
+<script src="{{asset('ui-toko/plugins/progressbar/progressbar.min.js')}}"></script>
 @yield('footer')
 </body>
 </html>

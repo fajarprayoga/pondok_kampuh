@@ -123,9 +123,13 @@
               <input type="number" class="form-control" id="floatingInput" placeholder="Price Product" name="price">
               <label for="floatingInput">Price</label>
             </div>
-            <div class="form-floating mb-3">
+            {{--  <div class="form-floating mb-3">
               <input type="number" class="form-control" id="floatingInput" placeholder="Stock Product" name="stock">
               <label for="floatingInput">Stock</label>
+            </div>  --}}
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control" id="floatingInput" placeholder="Satuan Gram" name="weight">
+              <label for="floatingInput">Weight (gram)</label>
             </div>
             <div class="form-floating mb-3">
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
@@ -143,23 +147,23 @@
                 <div class="row text-center">
                   <div class="col-2">
                     <label for="floatingInput">S</label>
-                    <input type="text" class="form-control text-center" placeholder="0" value="0" name="S">
+                    <input type="text" class="form-control text-center" value="0" name="S">
                   </div>
                   <div class="col-2">
                     <label for="floatingInput">M</label>
-                    <input type="text" class="form-control text-center" placeholder="0"  value="0" name="M">
+                    <input type="text" class="form-control text-center"  value="0" name="M">
                   </div>
                   <div class="col-2">
                     <label for="floatingInput">L</label>
-                    <input type="text" class="form-control text-center" placeholder="0"  value="0" name="L">
+                    <input type="text" class="form-control text-center"  value="0" name="L">
                   </div>
                   <div class="col-2">
                     <label for="floatingInput">XL</label>
-                    <input type="text" class="form-control text-center" placeholder="0"  value="0" name="XL">
+                    <input type="text" class="form-control text-center"  value="0" name="XL">
                   </div>
                   <div class="col-3">
                     <label for="floatingInput">All Size</label>
-                    <input type="text" class="form-control text-center" placeholder="0"  value="0" name="AllSize">
+                    <input type="text" class="form-control text-center"  value="0" name="AllSize">
                   </div>
                 </div>
               </div>
@@ -206,9 +210,13 @@
                 <input type="number" class="form-control" id="floatingInput" placeholder="Price Product" name="price" value="{{$product->price}}">
                 <label for="floatingInput">Price</label>
               </div>
-              <div class="form-floating mb-3">
+              {{--  <div class="form-floating mb-3">
                 <input type="number" class="form-control" id="floatingInput" placeholder="Stock Product" name="stock" value="{{$product->stock}}">
                 <label for="floatingInput">Stock</label>
+              </div>  --}}
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingInput" placeholder="Satuan Gram" name="weight" value="{{$product->weight}}">
+                <label for="floatingInput">Weight (gram)</label>
               </div>
               <div class="form-floating mb-3">
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description" >{{$product->description}}</textarea>
@@ -288,9 +296,10 @@
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">{{$product->name}}</h5>
-                  <p class="card-text">Description <br>{{$product->description}}</p>
+                  {{--  <p class="card-text">Description <br>{{$product->description}}</p>  --}}
                 </div>
                 <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Description <br>{{$product->description}}</li>
                   <li class="list-group-item">Price {{$product->price}}</li>
                   <li class="list-group-item">
                     @foreach ($product->size as $size)
@@ -298,6 +307,7 @@
                     @endforeach
                   </li>
                   <li class="list-group-item">Stock {{$product->stock}}</li>
+                  <li class="list-group-item">Weight {{$product->weight}}</li>
                 </ul>
                 <div class="card-body">
                   @if ($product->status == 'ACTIVE')
