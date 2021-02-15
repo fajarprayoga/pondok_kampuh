@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('home/city/{id}', [CheckoutController::class, 'get_city'])->name('city');
     // Route::get('/origin={city_origin}&destination={city_destination}&weight={weight}&courier={courier}','CheckoutController@get_ongkir');
     Route::get('home/ongkir/destination={city_destination}&weight={weight}&courier={courier}', [CheckoutController::class, 'get_ongkir'])->name('ongkir');
+    Route::post('home/checkout/process', [CheckoutController::class, 'process'])->name('processCheckout');
     Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 });
 

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class CheckoutController extends Controller
 {
     public $apiKey =  "key: a4dcb505f795abcf44a5d341babfb85e";
+    
+    // index
     public function index()
     {
         $cart = session()->get('cart');
@@ -18,6 +22,26 @@ class CheckoutController extends Controller
         // return $weight;
     }
 
+    // process
+    public function process(Request $request)
+    {
+        $cart = session()->get('cart');
+        $total = array_sum(array_column($cart, 'priceTotal')); 
+        $data = ['users_id' => Auth::user()->id, 'destination' => $request->address, 'total' => ($total + $request->priceOngkir)];
+       
+        $order = Order::create($data);
+
+        if($order && $cart){
+            foreach($cart as $index => $item){
+                $order->orderDetail()->attach($item['id'], ['quantity' => $item['quantity'], 'price' => $item['price']]);
+            }
+            return'Checkout Berhasil';
+        }else{
+            return 'Checkout Gagal';
+        }
+    }
+
+    // Province
     public function get_province(){
         $curl = curl_init();
 
@@ -25,16 +49,16 @@ class CheckoutController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-           $this->apiKey
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                $this->apiKey
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -52,26 +76,26 @@ class CheckoutController extends Controller
             return $data_pengirim;
         }
             
-        
     }
 
+    // city
     public function get_city($id){
         $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=$id",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            $this->apiKey
-        ),
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/city?&province=$id",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                $this->apiKey
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -89,6 +113,7 @@ class CheckoutController extends Controller
         // return 'cite';
     }
 
+    // ongkir
     public function get_ongkir($destination, $weight, $courier)
     {
         $curl = curl_init();
@@ -106,8 +131,8 @@ class CheckoutController extends Controller
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => "origin=17&destination=$destination&weight=$weight&courier=$courier",
             CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded",
-            $this->apiKey
+                "content-type: application/x-www-form-urlencoded",
+                $this->apiKey
             ),
         ));
         $response = curl_exec($curl);

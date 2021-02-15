@@ -2,6 +2,7 @@
 @section('head')
 <link rel="stylesheet" type="text/css" href="{{asset('ui-toko/styles/checkout.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('ui-toko/styles/checkout_responsive.css')}}">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('content')
@@ -34,7 +35,7 @@
                                                 <div class="row">
                                                       <div class="col-lg-12">
                                                             <!-- Name -->
-                                                            <input type="text" id="checkout_name" class="checkout_input" placeholder="Nama" required="required" name="name">
+                                                            <input type="text" id="name" class="checkout_input" placeholder="Nama" required="required" name="name">
                                                       </div>
                                                 </div>
                                                 <div>
@@ -73,19 +74,19 @@
                                                 </div>  --}}
                                                 <div>
                                                       <!-- Country -->
-                                                      <textarea class="checkout_input" style="padding: 15px 20px" name="address" id="" cols="30" rows="10" placeholder="jl.baturaya no 9 desa mengwi"></textarea>
+                                                      <textarea class="checkout_input" style="padding: 15px 20px" name="address" id="address" cols="30" rows="10" placeholder="jl.baturaya no 9 desa mengwi"></textarea>
                                                 </div>
                                                 <div>
                                                       <!-- Zipcode -->
-                                                      <input type="text" id="checkout_zipcode" class="checkout_input" placeholder="Code Pos" required="required">
+                                                      <input type="text" id="codePos" class="checkout_input" placeholder="Code Pos" required="required">
                                                 </div>
                                                 <div>
                                                       <!-- Phone no -->
-                                                      <input type="phone" id="checkout_phone" class="checkout_input" placeholder="Phone No." required="required">
+                                                      <input type="number" id="phone" class="checkout_input" placeholder="Phone No." required="required">
                                                 </div>
                                                 <div>
                                                       <!-- Email -->
-                                                      <input type="phone" id="checkout_email" class="checkout_input" placeholder="Email" required="required">
+                                                      <input type="email" id="email" class="checkout_input" placeholder="Email" required="required">
                                                 </div>
                                           </form>
                                     </div>
@@ -142,7 +143,9 @@
                                                       Silahkan anda lanjutkan ke proses pembayarn saudara {{Auth::user()->name}} and semoga hari anda menyenangkan 
                                                 </p>
                                           </div>
-                                          <div class="checkout_button trans_200"><a href="checkout.html">place order</a></div>
+                                          {{--  <div class="checkout_button" id="checkout" style="font-size: 25px; color: #ffffff;">place order</div>
+                                            --}}
+                                            <button style="padding: 8px; width: 100%; margin-top: 10px; border-width: 1px; border-radius: 5px; font-size: 30px; border-color: rgb(50, 211, 157); background-color: rgb(50, 211, 157); color: #ffffff; font-weight: bold"  type="submit" id="checkout">Checkout</button>
                                     </div>
                               </div>
                         </div>
@@ -153,6 +156,8 @@
 
 @section('footer')
 <script>
+
+      {{--  Rupiah  --}}
       function Rupiah (bilangan){
             var	number_string = bilangan.toString(),
             sisa 	= number_string.length % 3,
@@ -168,6 +173,15 @@
       $(document).ready(function(){
 
             var ongkir = 0;
+
+            //Token
+            $.ajaxSetup({
+                  headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  }
+            });
+
+            //Province
             //ini ketika provinsi tujuan di klik maka akan eksekusi perintah yg kita mau
             //name select nama nya "provinve_id" kalian bisa sesuaikan dengan form select kalian
             $('select[name="province"]').on('change', function(){
@@ -200,7 +214,7 @@
             });
       });
 
-
+      {{--  Pilih Kurir  --}}
       $('select[name="courier"]').on('change', function(){
             // kita buat variable untuk menampung data data dari  inputan
             // name city_origin di dapat dari input text name city_origin
@@ -239,6 +253,7 @@
             courier = null;
       });
 
+      //harga ongkir
       $('#service').on('change', function(){
             var ongkir = $('#service').val()
             var total = {{$total}} + parseInt(ongkir)
@@ -246,6 +261,48 @@
             $('#total').text(Rupiah(total))
             {{--  console.log(typeof(ongkir))  --}}
       })
+
+      //checkout
+      $('#checkout').on('click', function(){
+            var name = $('#name').val()
+            var province = $('#province').val()
+            var city = $('#city').val()
+            var courier = $('#courier').val()
+            var service = $('#service').val()
+            var address = $('textarea#address').val();
+            var codepos = $('#codePos').val()
+            var phone = $('#phone').val()
+            var email = $('#email').val()
+            var priceOngkir = $('select[name="service"]').val()
+            var total = $('#total').text()
+
+            {{--  if(name != null && province != null && city != null courier != null && service != null && address && codepos != null && phone != null  && email != null && priceOngkir != null ){  --}}
+                  $.ajax({
+                        type: "POST",
+                        url: '{{route("processCheckout")}}',
+                        data: {
+                          name : name,
+                          province : province,
+                          city : city,
+                          courier : courier,
+                          service : service,
+                          address : address,
+                          codepos : codepos,
+                          phone : phone,
+                          email : email,
+                          priceOngkir : priceOngkir,
+                          total : total
+                        },
+                        success: function(data){
+                          console.log(data);
+                        }
+                  });
+            {{--  }else{
+                  alert('Lengkapi data anda')
+            }  --}}
+      })
+
+      
 </script>
       <script src="{{asset('ui-toko/js/checkout.js')}}"></script>
 @endsection
