@@ -71,6 +71,15 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{route('order.index')}}" class="nav-link ">
+                <i class="fas fa-luggage-cart" style="color: #7039ee;margin-right: 10px"></i>
+                <p>
+                  Order
+                  {{--  <span class="right badge badge-danger">New</span>  --}}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{route('auth.logout')}}" class="nav-link ">
                 <i class="fas fa-sign-out-alt" style="color: #94b4a4;margin-right: 10px"></i>
                 <p>

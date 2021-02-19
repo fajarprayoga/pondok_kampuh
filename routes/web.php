@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PondokKampuhController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -65,6 +66,13 @@ Route::group(['middleware' => ['auth']], function() {
         'create' => 'category.store',
         'update' => 'category.update',
         'delete' => 'category.destroy'
+    ]); 
+
+    Route::resource('order', OrderController::class)->names([
+        'index' => 'order.index',
+        'create' => 'order.store',
+        'update' => 'order.update',
+        'delete' => 'order.destroy'
     ]); 
 
     Route::get('home/cart',[ CartController::class, 'cart'])->name('cart');

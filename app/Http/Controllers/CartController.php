@@ -30,14 +30,14 @@ class CartController extends Controller
             $cart = [
                     $id => [
                         "id" => $id,
-                        "name" => $product->name,
+                        "name" => $product->name, 
                         "quantity" => 1,
                         "price" => $product->price,
                         "priceTotal" => $product->price,
                         "size" => $idSize,
                         "weight" => $product->weight,
                         "weightTotal" => $product->weight,
-                        "image" => $product->image[0]->name,
+                        "image" => $product->image[0]->name
                     ]
             ];
             session()->put('cart', $cart);

@@ -43,7 +43,7 @@
                                                       <select id="province" class="dropdown_item_select checkout_input" require="required" name="province">
                                                             <option selected>Provinsi</option> 
                                                             @foreach ($province as $provinsi)
-                                                                  <option value="{{$provinsi['province_id']}}">{{$provinsi['province']}}</option> 
+                                                                  <option value="{{$provinsi['province_id']}}" id="provinceText{{$provinsi['province_id']}}">{{$provinsi['province']}}</option> 
                                                             @endforeach
                                                       </select>
                                                 </div>
@@ -204,7 +204,8 @@
                                     // jika ada kita looping dengan each
                                     $.each(data, function(key, value){
                                     // perhtikan dimana kita akan menampilkan data select nya, di sini saya memberi name select kota adalah destination
-                                          $('select[name="city"]').append('<option value="'+ value.city_id +'" namakota="'+ value.type +' ' +value.city_name+ '">' + value.type + ' ' + value.city_name + '</option>');
+                                          {{-- $('select[name="city"]').append('<option value="'+ value.city_id +'" namakota="'+ value.type +' ' +value.city_name+ '">' + value.type + ' ' + value.city_name + '</option>'); --}}
+                                          $('select[name="city"]').append('<option value =' + value.city_id +' id="cityText'+value.city_id+'" namakota ="' + value.type + ' ' + value.city_name + '">' +value.city_name+'</option>');
                                     });
                               }
                         });
@@ -266,7 +267,9 @@
       $('#checkout').on('click', function(){
             var name = $('#name').val()
             var province = $('#province').val()
+            var provinceText = $('#provinceText' + province).text()
             var city = $('#city').val()
+            var cityText = $('#cityText' + city).text()
             var courier = $('#courier').val()
             var service = $('#service').val()
             var address = $('textarea#address').val();
@@ -276,14 +279,14 @@
             var priceOngkir = $('select[name="service"]').val()
             var total = $('#total').text()
 
-            {{--  if(name != null && province != null && city != null courier != null && service != null && address && codepos != null && phone != null  && email != null && priceOngkir != null ){  --}}
+            if(name != '' && provinceText != '' && cityText != '' && courier != '' && service != '' && address != '' && codepos != '' && phone != ''  && email != '' && priceOngkir != '' ){ 
                   $.ajax({
                         type: "POST",
                         url: '{{route("processCheckout")}}',
                         data: {
                           name : name,
-                          province : province,
-                          city : city,
+                          province : provinceText,
+                          city : cityText,
                           courier : courier,
                           service : service,
                           address : address,
@@ -294,15 +297,16 @@
                           total : total
                         },
                         success: function(data){
-                          console.log(data);
+                          alert('Check Out berhasil')
+                          url = "{{url('home')}}/";
+                          location.href=(url)
+                          {{--  <?php redirect('home')->with('success', 'Checkout telah berhasil');?>  --}}
                         }
                   });
-            {{--  }else{
+             }else{
                   alert('Lengkapi data anda')
-            }  --}}
+            } 
       })
-
-      
 </script>
       <script src="{{asset('ui-toko/js/checkout.js')}}"></script>
 @endsection

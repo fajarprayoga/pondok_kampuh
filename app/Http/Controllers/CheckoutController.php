@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Size;
+use Illuminate\Support\Facades\Session;
+
 
 class CheckoutController extends Controller
 {
@@ -27,18 +31,46 @@ class CheckoutController extends Controller
     {
         $cart = session()->get('cart');
         $total = array_sum(array_column($cart, 'priceTotal')); 
-        $data = ['users_id' => Auth::user()->id, 'destination' => $request->address, 'total' => ($total + $request->priceOngkir)];
-       
+        $data = [
+            'users_id' => Auth::user()->id,
+            'name' => $request->name, 
+            'email' => $request->email,
+            'destination' =>$request->province .' '. $request->city.' '. $request->address, 
+            'phone' => $request->phone,
+            'courier' => $request->courier,
+            'service' => (int)$request->service,
+            'postcode' => $request->codepos,
+            'total' => ($total + $request->priceOngkir)
+        ];
+
         $order = Order::create($data);
 
         if($order && $cart){
             foreach($cart as $index => $item){
-                $order->orderDetail()->attach($item['id'], ['quantity' => $item['quantity'], 'price' => $item['price']]);
+                $order->orderDetail()->attach(
+                    $item['id'], 
+                    [
+                        'quantity' => $item['quantity'], 
+                        'price' => $item['price']
+                    ]
+                        
+                );
+                    $product = Product::findOrFail($item['id']);
+                    $product->stock =  ($product->stock - $item['quantity']);
+                    $product->save();
+                    $size = Size::findOrFail($item['size']);
+                    $size->stock =  ($size->stock - $item['quantity']);
+                    $size->save();
+
+                    // $product->stock = (($product->stock - $cart['quantity']));
             }
-            return'Checkout Berhasil';
+            Session::forget('cart');
+            return redirect()->route('cart')->with('success', 'Produk di tambahkan di keranjang');
+            // return'Checkout Berhasil';
         }else{
             return 'Checkout Gagal';
         }
+        // return var_dump($data);
     }
 
     // Province

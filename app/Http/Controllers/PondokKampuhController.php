@@ -11,7 +11,7 @@ class PondokKampuhController extends Controller
 {
     public function home()
     {
-        $product = Product::where('stock', '>', 0)->latest()->paginate(6);
+        $product = Product::where('stock', '>', 0)->where('status', 'ACTIVE')->latest()->paginate(6);
         return view('pondok_kampuh/home', ['products' => $product]);
         // return dd($product);
     }
