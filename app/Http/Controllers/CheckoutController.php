@@ -48,14 +48,14 @@ class CheckoutController extends Controller
         if($order && $cart){
             foreach($cart as $index => $item){
                 $order->orderDetail()->attach(
-                    $item['id'], 
+                    $item['productId'], 
                     [
                         'quantity' => $item['quantity'], 
                         'price' => $item['price']
                     ]
                         
                 );
-                    $product = Product::findOrFail($item['id']);
+                    $product = Product::findOrFail($item['productId']);
                     $product->stock =  ($product->stock - $item['quantity']);
                     $product->save();
                     $size = Size::findOrFail($item['size']);
@@ -107,9 +107,9 @@ class CheckoutController extends Controller
             $data_pengirim = $response['rajaongkir']['results'];
             return $data_pengirim;
         }
-            
+        
     }
-
+    
     // city
     public function get_city($id){
         $curl = curl_init();

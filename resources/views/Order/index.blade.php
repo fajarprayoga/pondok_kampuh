@@ -1,4 +1,4 @@
-@extends('component.global');
+@extends('component.global')
 @section('content')
       <div class="row" style="padding:10px">
             @if ($message = Session::get('success'))
@@ -22,7 +22,7 @@
                   <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">DataTable order</h3>
-                        <button style="float: right" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-create">Add Category</button>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -42,8 +42,13 @@
                         <tbody>  
                               <?php $no =1?>
                         @foreach ($orders as $order)
-                              <tr>
-                                    <td>{{$no}}</td>
+                              <tr style="background-color: {{$order->notif =='NEW'? 'rgb(89, 175, 255)' : 'white'}}">
+                                    <td>
+                                          {{--  @if ($order->notif =="NEW")
+                                                <span style="color: red; font-size: 20px">*</span>    
+                                          @endif  --}}
+                                          {{$no}}
+                                    </td>
                                     <td>
                                        {{$order->name}}
                                     </td>
@@ -66,13 +71,13 @@
                                          {{rupiah($order->total)}}
                                     </td>
                                     <td>
-                                          {{--  <form action="{{route('order.destroy', $order->id)}}" method="post">
+                                          <form action="{{route('order.destroy', $order->id)}}" method="post">
                                                 @csrf
-                                                @method('delete')  --}}
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-xl">View</button>
-                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
+                                                @method('delete')
+                                                <button type="button" class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#modal-update{{$order->id}}" onclick="notif({{$order->id}})" >Edit</button>
+                                                <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" >View</button>
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                           {{--  </form>  --}}
+                                           </form>
                                     </td>
                               </tr>
                               <?php $no++ ?>
@@ -101,44 +106,138 @@
 @endsection
 
 @section('footer')
-<!-- Modal -->
-<!-- Modal View -->
-<div class="modal fade" id="modal-xl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-        <div class="modal-body">
-          <div class="card" style="width: 100%;">
-            {{--  <img class="card-img-top" src="..." alt="Card image cap">  --}}
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>          
+      <!-- Modal -->
+      <!-- Modal View -->
+      @foreach ($orders as $order)
+      <div class="modal fade" id="modal-view{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                              <button type="button" class="btn-close reloadPage" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                              <div class="row">
+                                    <div class="col-12">
+                                          <div class="card">
+                                                <div class="card-header">
+                                                <h3 class="card-title">Responsive Hover Table</h3>
+                                    
+                                                {{--  <div class="card-tools">
+                                                      <div class="input-group input-group-sm" style="width: 150px;">
+                                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                          
+                                                            <div class="input-group-append">
+                                                                   @if (<span style="color: red; font-size: 20px">*</span>)
+                                                                  <button type="submit" class="btn btn-default">
+                                                                        <i class="fas fa-search"></i>
+                                                                  </button>
+                                                            </div>
+                                                      </div>
+                                                </div>  --}}
+                                                </div>
+                                                <!-- /.card-header -->
+                                                <div class="card-body table-responsive p-0">
+                                                      <table class="table table-hover text-nowrap">
+                                                            <thead>
+                                                                  <tr>
+                                                                        <th>No</th>
+                                                                        <th>Name</th>
+                                                                        <th>Image</th>
+                                                                        <th>Category</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Weight</th>
+                                                                        <th>Price</th>
+                                                                        <th>Total</th>
+                                                                  </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                  <?php $no = 1?>
+                                                                 @foreach ($order->orderDetail as $item)
+                                                                        <tr>
+                                                                              <td>{{$no}} </td>
+                                                                              <td>{{$item->name}}</td>
+                                                                              <td><img src="{{asset('storage/'.$item->image[0]->name)}} " alt="" style="width: 50px; height: 50px"></td>
+                                                                              <td>{{$item->category->name}}</td>
+                                                                              <td>{{$item->pivot->quantity}}</td>
+                                                                              <td>{{$item->weight}}</td>
+                                                                              <td>{{rupiah($item->price)}}</td>
+                                                                              <td>{{rupiah($item->price * $item->pivot->quantity)}}</td>
+                                                                              
+                                                                        </tr>
+                                                                        <?php $no++?>
+                                                                 @endforeach
+                                                            </tbody>
+                                                      </table>
+                                                </div>
+                                          <!-- /.card-body -->
+                                          </div>
+                                          <!-- /.card -->
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary reloadPage" data-bs-dismiss="modal">Close</button>
+                              {{--  <button type="submit" class="btn btn-primary">Save changes</button>  --}}
+                        </div>
+                  </form>
+                  </div>
             </div>
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              {{--  <p class="card-text">Description <br></p>  --}}
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Description <br></li>
-              <li class="list-group-item">Price </li>
-              <li class="list-group-item">
-              </li>
-            </ul>
-          </div>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
-    </div>
-  </div>
-</div>
+      @endforeach
+
+
+      {{--  modal update  --}}
+      @foreach ($orders as $order)
+      <div class="modal fade" id="modal-update{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                              <button type="button" class="btn-close reloadPage" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{route('statusOrder', $order->id)}}" method="post">
+                              @csrf
+                              @method('POST')
+                              <div class="modal-body">
+                                    <div class="col-sm-12">
+                                          <!-- select -->
+                                                <div class="form-group">
+                                                      <label>Select Status</label>
+                                                      <select class="form-control" name="status">
+                                                            <option value="PENDING" {{$order->status == 'PENDING' ? 'selected' : ''}}><span class="badge badge-warning">PENDING</span></option>
+                                                            <option value="PROCESS" {{$order->status == 'PROCESS' ? 'selected' : ''}}><span class="badge badge-primary">PROCESS</span></option>
+                                                            <option value="SUCCESS" {{$order->status == 'SUCCESS' ? 'selected' : ''}}><span class="badge badge-success">SUCCESS</span></option>
+                                                      </select>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary reloadPage" data-bs-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-secondary reloadPage btn-success">Update</button>
+                                    {{--  <button type="submit" class="btn btn-primary">Save changes</button>  --}}
+                              </div>
+                        </form>
+                  </form>
+                  </div>
+            </div>
+      </div>
+      @endforeach
+
+      <script>
+            $('.reloadPage').on('click', function() {
+                  location.reload()
+            })
+
+            function notif(id){
+                  $.ajax({
+                        type: "GET",
+                        url: 'notif-order/' + id,
+                        success: function(data){
+                              console.log(data)
+                        }
+                  });
+            }
+      </script>
 @endsection
+

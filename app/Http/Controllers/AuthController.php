@@ -19,9 +19,16 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            if(Auth::user()->status == 'ACTIVE'){
+                $request->session()->regenerate();
+                return redirect()->intended('dashboard');
+            }else{
+                Auth::logout();
 
-            return redirect()->intended('dashboard');
+                $request->session()->invalidate();
+        
+                $request->session()->regenerateToken();
+            }
         }
 
         return back()->withErrors([

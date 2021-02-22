@@ -87,6 +87,8 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::get('/origin={city_origin}&destination={city_destination}&weight={weight}&courier={courier}','CheckoutController@get_ongkir');
     Route::get('home/ongkir/destination={city_destination}&weight={weight}&courier={courier}', [CheckoutController::class, 'get_ongkir'])->name('ongkir');
     Route::post('home/checkout/process', [CheckoutController::class, 'process'])->name('processCheckout');
+    Route::get('notif-order/{id}', [OrderController::class, 'notif_order'])->name('notifOrder');
+    Route::post('status-order/{id}', [OrderController::class, 'status_order'])->name('statusOrder');
     Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 });
 

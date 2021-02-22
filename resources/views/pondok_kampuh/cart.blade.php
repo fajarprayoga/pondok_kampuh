@@ -64,10 +64,10 @@
                                                                   </div>
                                                                   {{--  <div class="product_color product_text"><span>Color: </span>beige</div>  --}}
                                                                   <div class="product_size product_text"><span>Size: </span>
-                                                                        <select name="" id="size{{$cart['id']}}" onchange="update({{$cart['id']}})">
+                                                                        <select name="" id="size{{$cart['id']}}" onchange="update({{$cart['id']}}, {{$cart['productId']}})">
                                                                               <?php $stock =null ?>
                                                                               @foreach ($sizes as $size)
-                                                                                    @if ($size->product_id == $cart['id'] && $size->stock > 0)
+                                                                                    @if ($size->product_id == $cart['productId'] && $size->stock > 0)
                                                                                           <option value="{{$size}}" id="stockcoba{{$size->id}}" {{$size->id ==$cart['size']? 'selected' : ''}} <?php $stock = $size->stock?>>{{$size->name}}</option>
                                                                                     @endif
                                                                               @endforeach   
@@ -143,11 +143,11 @@
                         $('#quantity' + id).text(size.stock-1)
                         qty = size.stock
                   }
-                  update(id, qty);
+                  update(id,null, qty);
                   $('#total' + id).text(Rupiah(qty * price))
             }
 
-            function update(id, paramsQty=null){
+            function update(id,idProduct = null, paramsQty=null){
                   var qty = parseInt($('#quantity' + id).text());
                   var size = JSON.parse($('#size' + id).val());
                   if(size.stock < qty){
@@ -158,21 +158,17 @@
                   $.ajax({
                         type:'GET',
                         url: "{{url('home/cart/update')}}",
-                        data:'id=' +id + '&qty=' + (paramsQty == null ? qty : paramsQty) + '&idSize=' + size.id,
+                        data:'id=' +id + '&qty=' + (paramsQty == null ? qty : paramsQty) + '&idSize=' + size.id + '&idProduct=' + idProduct,
                         success: function(html) {
-                              console.log('Your Product success insert to cart');
+                             {{--  alert(html)
+                             location.reload()  --}}
+                             console.log(html)
+                             if(html == 1){
+                                    location.reload()
+                                    alert('Keranjang di update') 
+                             }
                         } 
-                  });
-            }
-            function remove(id){
-                  $.ajax({
-                        type:'GET',
-                        url: "{{url('home/cart/remove')}}",
-                        data:'id=' +id ,
-                        {{-- success: function(html) {
-                              console.log('Your Product success insert to cart');
-                        }  --}}
-                  });
+                  });  
             }
 
             function checkout(){
