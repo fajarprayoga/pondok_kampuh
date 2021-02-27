@@ -30,9 +30,13 @@ class CheckoutController extends Controller
     public function process(Request $request)
     {
         $cart = session()->get('cart');
+        $karakter = $request->id.$request->name.$request->total.$request->codepos;
+        $shuffle  = str_shuffle($karakter);
+        $code = mb_substr($shuffle,0,6);
         $total = array_sum(array_column($cart, 'priceTotal')); 
         $data = [
             'users_id' => Auth::user()->id,
+            'code' => '#'.$code,
             'name' => $request->name, 
             'email' => $request->email,
             'destination' =>$request->province .' '. $request->city.' '. $request->address, 
@@ -55,12 +59,12 @@ class CheckoutController extends Controller
                     ]
                         
                 );
-                    $product = Product::findOrFail($item['productId']);
-                    $product->stock =  ($product->stock - $item['quantity']);
-                    $product->save();
-                    $size = Size::findOrFail($item['size']);
-                    $size->stock =  ($size->stock - $item['quantity']);
-                    $size->save();
+                    // $product = Product::findOrFail($item['productId']);
+                    // $product->stock =  ($product->stock - $item['quantity']);
+                    // $product->save();
+                    // $size = Size::findOrFail($item['size']);
+                    // $size->stock =  ($size->stock - $item['quantity']);
+                    // $size->save();
 
                     // $product->stock = (($product->stock - $cart['quantity']));
             }
@@ -72,6 +76,7 @@ class CheckoutController extends Controller
         }
         // return var_dump($data);
     }
+
 
     // Province
     public function get_province(){

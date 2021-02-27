@@ -69,12 +69,12 @@
                             @endif
                           </td>
                           <td>
-                            <form action="" method="post">
-                              {{-- @csrf --}}
-                              {{-- @method('delete') --}}
+                            <form action="{{route('user.destroy', $user->id)}}" method="post">
+                              @csrf
+                              @method('delete')
                               <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit-modal{{$user->id}}">Edit</button>
                               {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="">View</button> --}}
-                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                              <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                           </td>
                         </tr>

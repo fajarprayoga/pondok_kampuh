@@ -80,8 +80,8 @@
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Produk</a></li>
 					<li><a href="#">Contact</a></li>
+					<li><a href="{{route('historyOrder')}}">History</a></li>
 					<li><a href="#">About</a></li>
 				</ul>
 			</nav>
@@ -94,7 +94,7 @@
 					</form>
 				</div>
 				<!-- User -->
-				<div class="user"><a href="#"><div><img src="{{asset('ui-toko/images/user.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
+				<div class="user"><a href="{{empty(Auth::user()) ? route('auth.login') : '#'}}"><div><img src="{{asset('ui-toko/images/user.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
 				<!-- Cart -->
 				<div class="user"><a href="{{route('cart')}}"><div><img class="svg" src="{{asset('ui-toko/images/cart.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>{{$total}}</div></div></a></div>
 				<!-- Phone -->

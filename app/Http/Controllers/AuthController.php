@@ -6,11 +6,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
     public function login()
     {
+        if(!empty(Auth::user())){
+            if(Auth::user()->roles == 'ADMIN'){
+                return redirect('dashboard');
+            }
+            return redirect('home');
+        }
         return view('auth.login');
     }
 
@@ -21,7 +28,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             if(Auth::user()->status == 'ACTIVE'){
                 $request->session()->regenerate();
-                return redirect()->intended('dashboard');
+                if(Auth::user()->roles == 'ADMIN'){
+                    return redirect()->intended('dashboard');
+                }else{
+                    return redirect()->intended('home');
+                }
             }else{
                 Auth::logout();
 
@@ -38,6 +49,12 @@ class AuthController extends Controller
 
     public function register()
     {
+        if(!empty(Auth::user())){
+            if(Auth::user()->roles == 'ADMIN'){
+                return redirect('dashboard');
+            }
+            return redirect('home');
+        }
         return view('auth.register');
     }
 
@@ -61,8 +78,14 @@ class AuthController extends Controller
             'phone' => $request->phone,
             // 'image' => $image_path
         ]);
+
+        if($user){
+            event(new Registered($user));
+            return redirect('login')->with('success', 'User success Register');
+        }else{
+            return redirect()->back();
+        }
         
-        return redirect('login')->with('success', 'User success Register');
     }
 
     public function logout(Request $request)

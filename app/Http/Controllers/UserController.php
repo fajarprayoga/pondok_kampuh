@@ -31,4 +31,10 @@ class UserController extends Controller
         $user->update($data);
         return redirect()->back()->with('success', 'User is updated');
     }
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'User is deleted');
+    }
 }

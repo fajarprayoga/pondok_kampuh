@@ -80,7 +80,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('auth.logout')}}" class="nav-link ">
+              <a href="{{route('auth.logout')}}" onclick="return confirm('Logout Sekarang?')" class="nav-link ">
                 <i class="fas fa-sign-out-alt" style="color: #94b4a4;margin-right: 10px"></i>
                 <p>
                   Log Out

@@ -1,4 +1,7 @@
 @extends('component.global')
+@section('title')
+     Order
+@endsection
 @section('content')
       <div class="row" style="padding:10px">
             @if ($message = Session::get('success'))
@@ -30,6 +33,7 @@
                         <thead>
                         <tr>
                               <th>No</th>
+                              <th>Code</th>
                               <th>Nama Customers</th>
                               <th>Destination</th>
                               <th>Jasa</th>
@@ -42,13 +46,18 @@
                         <tbody>  
                               <?php $no =1?>
                         @foreach ($orders as $order)
-                              <tr style="background-color: {{$order->notif =='NEW'? 'rgb(89, 175, 255)' : 'white'}}">
+                              @if($order->image == null || $order->image == '')
+                                    <tr style="background-color: {{$order->notif =='NEW'? 'rgb(89, 175, 255)' : 'white'}}">
+                              @elseif(($order->image != null || $order->image != '') && $order->notif == 'NEW')
+                                    <tr style="background-color: rgb(0, 255, 200)">
+                              @endif
                                     <td>
                                           {{--  @if ($order->notif =="NEW")
                                                 <span style="color: red; font-size: 20px">*</span>    
                                           @endif  --}}
                                           {{$no}}
                                     </td>
+                                    <td>{{$order->code}}</td>
                                     <td>
                                        {{$order->name}}
                                     </td>
@@ -76,7 +85,8 @@
                                                 @method('delete')
                                                 <button type="button" class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#modal-update{{$order->id}}" onclick="notif({{$order->id}})" >Edit</button>
                                                 <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" >View</button>
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                <button type="button" class="btn {{$order->image == null || $order->image =='' ? 'btn-dark' : 'btn-info'}} btn-sm " {{$order->image == null || $order->image =='' ? 'disabled' : ''}} style="color: #ffffff" data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" >Bukti</button>
+                                                <button type="submit"  onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
                                            </form>
                                     </td>
                               </tr>
@@ -86,6 +96,7 @@
                         <tfoot>
                         <tr>
                               <th>No</th>
+                              <th>Code</th>
                               <th>Nama Customers</th>
                               <th>Destination</th>
                               <th>Jasa</th>

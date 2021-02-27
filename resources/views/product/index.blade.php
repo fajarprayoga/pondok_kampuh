@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('title')
-     Dashboard Product
+     Product
 @endsection
 @section('content')
       <div class="row" style="padding:10px">
@@ -69,7 +69,7 @@
                                 @method('delete')
                                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit-modal{{$product->id}}">Edit</button>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#view-modal{{$product->id}}">View</button>
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
                               </form>
                             </td>
                           </tr>

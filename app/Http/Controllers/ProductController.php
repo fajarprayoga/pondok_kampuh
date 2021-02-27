@@ -11,11 +11,22 @@ use Illuminate\Support\Str;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 use function App\Helpers\rupiah;
 
 class ProductController extends Controller
 {
+    // public function construct(){
+    //     // OTORISASI GATE
+    //     $user = Auth::user();
+    //     if (Gate::allows('isAdmin')) {
+    //         // akses logic untuk user dengan role author
+    //      } else {
+    //         // akses logic untuk user selain role author
+    //      }   
+    // }
+        
     public function index()
     {
         $product = Product::all();

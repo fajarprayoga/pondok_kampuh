@@ -279,7 +279,7 @@
             var priceOngkir = $('select[name="service"]').val()
             var total = $('#total').text()
 
-            if(name != '' && provinceText != '' && cityText != '' && courier != '' && service != '' && address != '' && codepos != '' && phone != ''  && email != '' && priceOngkir != '' ){ 
+            if(name != '' && provinceText != '' && cityText != '' && courier != '' && service != '' && address != '' && codepos != '' && phone != ''  && email != '' && parseInt(priceOngkir) >0 ){ 
                   $.ajax({
                         type: "POST",
                         url: '{{route("processCheckout")}}',
