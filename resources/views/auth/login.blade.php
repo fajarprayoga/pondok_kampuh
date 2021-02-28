@@ -6,7 +6,7 @@
   <title>AdminLTE 3 | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{{asset('admin/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback')}}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- icheck bootstrap -->
@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
 <div class="login-box" style="width: 30%; ">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin </b>Pondok Kampuh</a>
+    <a href="../../index2.html"><b>Market </b>Pondok Kampuh</a>
   </div>
   <!-- /.login-logo -->
   <div class="card" style="height: 300px">

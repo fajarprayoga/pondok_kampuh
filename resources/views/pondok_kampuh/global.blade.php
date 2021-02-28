@@ -80,9 +80,9 @@
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="{{route('historyOrder')}}">History</a></li>
-					<li><a href="#">About</a></li>
+					{{--  <li><a href="#">Contact</a></li>  --}}
+					<li><a href="{{route('historyOrder')}}">History Order</a></li>
+					{{--  <li><a href="#">About</a></li>  --}}
 				</ul>
 			</nav>
 			<div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
@@ -94,14 +94,14 @@
 					</form>
 				</div>
 				<!-- User -->
-				<div class="user"><a href="{{empty(Auth::user()) ? route('auth.login') : '#'}}"><div><img src="{{asset('ui-toko/images/user.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
+				<div class="user"><a href="{{route('profile.index')}}"><div><img src="{{asset('ui-toko/images/user.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
 				<!-- Cart -->
 				<div class="user"><a href="{{route('cart')}}"><div><img class="svg" src="{{asset('ui-toko/images/cart.svg')}}" alt="https://www.flaticon.com/authors/freepik"><div>{{$total}}</div></div></a></div>
 				<!-- Phone -->
-				<div class="header_phone d-flex flex-row align-items-center justify-content-start">
+				{{--  <div class="header_phone d-flex flex-row align-items-center justify-content-start">
 					<div><div><img src="{{asset('ui-toko/images/phone.svg')}}" alt="https://www.flaticon.com/authors/freepik"></div></div>
 					<div>+1 912-252-7350</div>
-				</div>
+				</div>  --}}
 			</div>
 		</div>
 	</header>
@@ -114,12 +114,12 @@
 		<!-- Footer -->
 
 		<footer class="footer">
-			<div class="footer_content">
+			<div class="footer_content m-auto">
 				<div class="container">
 					<div class="row">
 						
 						<!-- About -->
-						<div class="col-lg-4 footer_col">
+						<div class="col-lg-6 footer_col">
 							<div class="footer_about">
 								<div class="footer_logo">
 									<a href="#">
@@ -134,7 +134,7 @@
 								</div>
 							</div>
 						</div>
-
+{{--  
 						<!-- Footer Links -->
 						<div class="col-lg-4 footer_col">
 							<div class="footer_menu">
@@ -146,17 +146,15 @@
 									</form>
 								</div>
 							</div>
-						</div>
+						</div>  --}}
 
 						<!-- Footer Contact -->
-						<div class="col-lg-4 footer_col">
+						<div class="col-lg-6 footer_col m-auto">
 							{{--  <div class="footer_contact">  --}}
-								<div class="footer_menu">
+								<div class="footer_menu" style="margin: auto">
 									<div class="footer_title">Social</div>
 									<ul class="footer_social_list d-flex flex-row align-items-start justify-content-start">
 										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 										<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 									</ul>
 								</div>
@@ -171,17 +169,17 @@
 						<div class="col">
 							<div class="footer_bar_content d-flex flex-md-row flex-column align-items-center justify-content-start">
 								<div class="copyright order-md-1 order-2"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+									Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 								</div>
-								<nav class="footer_nav ml-md-auto order-md-2 order-1">
+								{{--  <nav class="footer_nav ml-md-auto order-md-2 order-1">
 									<ul class="d-flex flex-row align-items-center justify-content-start">
 										<li><a href="category.html">Home</a></li>
 										<li><a href="category.html">Produk</a></li>
 										<li><a href="category.html">Konatk</a></li>
 										<li><a href="category.html">About Deco</a></li>
 									</ul>
-								</nav>
+								</nav>  --}}
 							</div>
 						</div>
 					</div>

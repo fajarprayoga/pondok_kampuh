@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -34,6 +36,13 @@ class OrderController extends Controller
         ]);
 
         if($order){
+            if($order->status == 'SUCCESS'){
+                $details = [
+                    'title' => 'Orderan sudah diterima dengan code '. $order->code,
+                    'body' => 'Terimah kasih telah berbelanja di toko kami ' . $order->email ,
+                ];     
+                Mail::to(Auth::user()->email)->send(new \App\Mail\NotifOrder($details));
+            }
             return redirect()->back()->with('success', 'Order status is updated');
         }else{
             return redirect()->back()->with('danger', 'Order status is not updated');
@@ -42,11 +51,11 @@ class OrderController extends Controller
 
      public function historyOrder()
      {
-        $orders = Order::with('customer')
-        ->with('orderDetail')
-        ->latest()
-        ->get();
-         return view('pondok_kampuh.history_order', compact('orders'));
+        $orders = Order::where('users_id', '=', Auth::user()->id)
+            ->with('orderDetail')
+            ->latest()
+            ->get();
+        return view('pondok_kampuh.history_order', compact('orders'));
      }
 
      public function buktiTransfer($id, Request $request)
@@ -66,7 +75,13 @@ class OrderController extends Controller
                 'notif' => 'NOTNEW'
             ]);
             if($order){
-                return redirect()->back()->with('success', 'Product is Added'); 
+                $details = [
+                    'title' => 'Verifikasi Bukti Orderan '. $order->code . ' from '. $order->email,
+                    'body' => 'Cek Bukti Pembayaran dari orderan dengan code '. $order->code,
+                ];
+                       
+                Mail::to('admin@pondok_kampuh.com')->send(new \App\Mail\NotifOrder($details));
+                return redirect('home')->with('success', 'termia kasih, mohon cek berskala status orderan id '. $order->code );
             }else{
                 return 'gagal';
             }

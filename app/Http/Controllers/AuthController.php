@@ -81,7 +81,7 @@ class AuthController extends Controller
 
         if($user){
             event(new Registered($user));
-            return redirect('login')->with('success', 'User success Register');
+            return redirect('verification.notice');
         }else{
             return redirect()->back();
         }
@@ -90,12 +90,16 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        if(!empty(Auth::user())){
+            Auth::logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect('login');
+            return redirect('login');
+        }else{
+            return redirect('login');
+        }
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\PondokKampuhController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -57,12 +58,25 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-// route toko
-Route::get('home',[ PondokKampuhController::class, 'home'])->name('home')->middleware('verified');
-Route::get('home/produk/{slug}',[ PondokKampuhController::class, 'produk'])->name('produk');
 
+// Route::get('send-mail', function () {
+   
+//     $details = [
+//         'title' => 'Mail from ItSolutionStuff.com',
+//         'body' => 'This is for testing email using smtp'
+//     ];
+   
+//     \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\NotifOrder($details));
+   
+//     dd("Email is Sent.");
+// });
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    // route toko
+    Route::get('home',[ PondokKampuhController::class, 'home'])->name('home');
+    Route::get('/',[ PondokKampuhController::class, 'home'])->name('home');
+    Route::get('home/produk/{slug}',[ PondokKampuhController::class, 'produk'])->name('produk');
+
     Route::get('dashboard', function () {
         return view('dashboard.index');
     });
@@ -94,6 +108,13 @@ Route::group(['middleware' => ['auth']], function() {
         'delete' => 'order.destroy'
     ]); 
 
+    Route::resource('profile', ProfileController::class)->names([
+        'index' => 'profile.index',
+        // 'create' => 'profile.store',
+        'update' => 'profile.update',
+        // 'delete' => 'profile.destroy'
+    ]); 
+
     Route::get('home/cart',[ CartController::class, 'cart'])->name('cart');
     Route::get('home/cart/add/{id}/size/{size}',[ CartController::class, 'addCart'])->name('addCart');
     Route::get('home/cart/update',[ CartController::class, 'updateCart'])->name('updateCart');
@@ -112,6 +133,6 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('notif-order/{id}', [OrderController::class, 'notif_order'])->name('notifOrder');
     Route::post('status-order/{id}', [OrderController::class, 'status_order'])->middleware('can:isAdmin')->name('statusOrder');
-    Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 });
+Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 

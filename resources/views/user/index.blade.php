@@ -78,6 +78,7 @@
                             </form>
                           </td>
                         </tr>
+                        <?php $no++?>
                     @endforeach
                     </tbody>
                     <tfoot>
