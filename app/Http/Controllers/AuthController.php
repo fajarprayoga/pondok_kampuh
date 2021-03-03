@@ -81,7 +81,7 @@ class AuthController extends Controller
 
         if($user){
             event(new Registered($user));
-            return redirect('verification.notice');
+            return view('auth.verify-email');
         }else{
             return redirect()->back();
         }

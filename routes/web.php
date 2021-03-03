@@ -4,14 +4,17 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PondokKampuhController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokoController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,9 +133,18 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('home/history', [OrderController::class, 'historyOrder'])->name('historyOrder');
     Route::put('home/upload-bukti/{id}', [OrderController::class, 'buktiTransfer'])->name('buktiTransfer');
     
+    Route::get('dashboard', [DashboardController::class, 'index'])->middleware('can:isAdmin')->name('dashboard.index');
     
     Route::get('notif-order/{id}', [OrderController::class, 'notif_order'])->name('notifOrder');
     Route::post('status-order/{id}', [OrderController::class, 'status_order'])->middleware('can:isAdmin')->name('statusOrder');
+
+    Route::get('toko', [TokoController::class, 'index'])->middleware('can:isAdmin')->name('toko');
+    Route::put('toko/update', [TokoController::class, 'update'])->middleware('can:isAdmin')->name('toko.update');
+
+
+    // report
+    Route::get('report-stock', [ProductController::class, 'report'])->middleware('can:isAdmin')->name('product.report');
+    Route::get('report-order', [OrderController::class, 'report'])->middleware('can:isAdmin')->name('order.report');
 });
 Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 

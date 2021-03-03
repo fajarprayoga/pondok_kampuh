@@ -25,7 +25,9 @@
                   <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">DataTable order</h3>
-
+                        <a href="{{route('order.report')}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                              <i class="fas fa-download"></i> Generate PDF
+                        </a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -34,10 +36,10 @@
                         <tr>
                               <th>No</th>
                               <th>Code</th>
-                              <th>Nama Customers</th>
+                              <th>Customers Name</th>
                               <th>Destination</th>
-                              <th>Jasa</th>
-                              <th>Ongkir</th>
+                              <th>Delivery Service</th>
+                              <th>Delivery Cost</th>
                               <th>Status</th>
                               <th>Total</th>
                               <th>Option</th>
@@ -66,13 +68,15 @@
                                     </td>
                                     <td>{{$order->courier}}</td>
                                     <td>{{rupiah($order->service)}}</td>
-                                    <td>
+                                    <td > 
                                           @if ($order->status == 'PENDING')
                                                 <span class="badge badge-warning">{{$order->status}}</span>
                                           @elseif ($order->status == 'PROCESS')
                                                 <span class="badge badge-success">{{$order->status}}</span>
                                           @elseif ($order->status == 'SUCCESS')
                                                 <span class="badge badge-primary">{{$order->status}}</span>
+                                          @elseif ($order->status == 'CANCELED')
+                                                <span class="badge badge-danger">{{$order->status}}</span>
                                           @endif
 
                                     </td>
@@ -80,14 +84,17 @@
                                          {{rupiah($order->total)}}
                                     </td>
                                     <td>
-                                          <form action="{{route('order.destroy', $order->id)}}" method="post">
+                                          {{--  <form action="{{route('order.destroy', $order->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#modal-update{{$order->id}}" onclick="notif({{$order->id}})" >Edit</button>
                                                 <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" >View</button>
                                                 <button type="button" class="btn {{$order->image == null || $order->image =='' ? 'btn-dark' : 'btn-info'}} btn-sm " {{$order->image == null || $order->image =='' ? 'disabled' : ''}} style="color: #ffffff" data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" >Bukti</button>
                                                 <button type="submit"  onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
-                                           </form>
+                                           </form>  --}}
+                                           <button type="button" class="btn btn-success btn-sm " data-bs-toggle="modal" data-bs-target="#modal-update{{$order->id}}" onclick="notif({{$order->id}})" style = "color : #ffffff; font-size : 10px" >Edit</button>
+                                           <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modal-view{{$order->id}}" onclick="notif({{$order->id}})" style = "color : #ffffff; font-size : 10px" >View</button>
+                                           <button type="button" class="btn {{$order->image == null || $order->image =='' ? 'btn-dark' : 'btn-info'}} btn-sm " {{$order->image == null || $order->image =='' ? 'disabled' : ''}} style = "color : #ffffff; font-size : 10px"  data-bs-toggle="modal" data-bs-target="#modal-token{{$order->id}}" onclick="notif({{$order->id}})" >Token</button>
                                     </td>
                               </tr>
                               <?php $no++ ?>
@@ -97,10 +104,10 @@
                         <tr>
                               <th>No</th>
                               <th>Code</th>
-                              <th>Nama Customers</th>
+                              <th>Customers Name</th>
                               <th>Destination</th>
-                              <th>Jasa</th>
-                              <th>Ongkir</th>
+                              <th>Delivery Service</th>
+                              <th>Delivery Cost</th>
                               <th>Status</th>
                               <th>Total</th>
                               <th>Option</th>
@@ -124,7 +131,7 @@
             <div class="modal-dialog modal-xl">
                   <div class="modal-content">
                         <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
                               <button type="button" class="btn-close reloadPage" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -204,7 +211,7 @@
             <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                         <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Update Order</h5>
                               <button type="button" class="btn-close reloadPage" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="{{route('statusOrder', $order->id)}}" method="post">
@@ -216,6 +223,7 @@
                                                 <div class="form-group">
                                                       <label>Select Status</label>
                                                       <select class="form-control" name="status">
+                                                            <option value="CANCELED" {{$order->status == 'CANCELED' ? 'selected' : ''}}><span class="badge badge-danger">CANCELED</span></option>
                                                             <option value="PENDING" {{$order->status == 'PENDING' ? 'selected' : ''}}><span class="badge badge-warning">PENDING</span></option>
                                                             <option value="PROCESS" {{$order->status == 'PROCESS' ? 'selected' : ''}}><span class="badge badge-primary">PROCESS</span></option>
                                                             <option value="SUCCESS" {{$order->status == 'SUCCESS' ? 'selected' : ''}}><span class="badge badge-success">SUCCESS</span></option>
@@ -229,6 +237,32 @@
                                     {{--  <button type="submit" class="btn btn-primary">Save changes</button>  --}}
                               </div>
                         </form>
+                  </form>
+                  </div>
+            </div>
+      </div>
+      @endforeach
+
+      {{--  Modal Token  --}}
+      @foreach ($orders as $order)
+      <div class="modal fade" id="modal-token{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Token</h5>
+                              <button type="button" class="btn-close reloadPage" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="text-align: center">
+                              <div class="row">
+                                    <div class="col-12" style="box-sizing: border-box">
+                                        <img src="{{asset('storage/'. $order->image)}}" style="width: 200px"; height="200px" alt="">
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary reloadPage" data-bs-dismiss="modal">Close</button>
+                              {{--  <button type="submit" class="btn btn-primary">Save changes</button>  --}}
+                        </div>
                   </form>
                   </div>
             </div>

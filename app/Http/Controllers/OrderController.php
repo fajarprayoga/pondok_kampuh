@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
@@ -36,6 +38,7 @@ class OrderController extends Controller
         ]);
 
         if($order){
+            $order = Order::findOrFail($id);
             if($order->status == 'SUCCESS'){
                 $details = [
                     'title' => 'Orderan sudah diterima dengan code '. $order->code,
@@ -43,6 +46,12 @@ class OrderController extends Controller
                 ];     
                 Mail::to(Auth::user()->email)->send(new \App\Mail\NotifOrder($details));
             }
+             $product = Product::findOrFail($item['productId']);
+            $product->stock =  ($product->stock - $item['quantity']);
+            $product->save();
+            $size = Size::findOrFail($item['size']);
+            $size->stock =  ($size->stock - $item['quantity']);
+            $size->save();
             return redirect()->back()->with('success', 'Order status is updated');
         }else{
             return redirect()->back()->with('danger', 'Order status is not updated');
@@ -96,5 +105,14 @@ class OrderController extends Controller
          $order->orderDetail()->detach();
          $order->delete();
          return redirect()->back()->with('success', 'Order deleted');
+     }
+
+     public function report()
+     {
+        $orders = Order::where('status', 'SUCCESS')->with('customer')
+        ->with('orderDetail')
+        ->latest()
+        ->get();
+         return view('order.report', compact('orders'));
      }
 }

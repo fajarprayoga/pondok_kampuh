@@ -28,9 +28,12 @@
             <div class="col-12">      
                   <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable Product</h3>
+                        <h3 class="card-title">Table Products</h3>
                         <button style="float: right" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal">Add Product</button>
-                    </div>
+                        <a href="{{route('product.report')}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                          <i class="fas fa-download"></i> Generate PDF
+                        </a>
+                      </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                       <table id="example1" class="table table-bordered table-striped">
@@ -64,13 +67,13 @@
                               @endif
                             </td>
                             <td>
-                              <form action="{{route('product.destroy', $product->id)}}" method="post">
+                              {{--  <form action="{{route('product.destroy', $product->id)}}" method="post">
                                 @csrf
-                                @method('delete')
+                                @method('delete')  --}}
                                 <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit-modal{{$product->id}}">Edit</button>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#view-modal{{$product->id}}">View</button>
-                                <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
-                              </form>
+                                {{--  <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
+                              </form>  --}}
                             </td>
                           </tr>
                           <?php $no++?>

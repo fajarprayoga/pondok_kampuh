@@ -205,4 +205,10 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back()->with('success', 'Product is deleted');
     }
+
+    public function report()
+    {
+        $products = Product::all();
+        return view('product.report', compact('products'));
+    }
 }

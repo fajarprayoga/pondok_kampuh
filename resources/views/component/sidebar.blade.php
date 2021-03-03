@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Pondok Kampuh</span>
+        <img src="{{asset('storage/'. $toko->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{$toko->name}}</span>
       </a>
   
       <!-- Sidebar -->
@@ -18,7 +18,7 @@
         </div>
   
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        {{--  <div class="form-inline">
           <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -27,7 +27,7 @@
               </button>
             </div>
           </div>
-        </div>
+        </div>  --}}
   
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -35,7 +35,7 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="" class="nav-link " >
+              <a href="{{route('dashboard.index')}}" class="nav-link " >
                 <i class="fas fa-tachometer-alt" style="color:#7579e7; margin-right: 10px"></i>
                 <p>
                   Dashboard
@@ -71,10 +71,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('order.index')}}" class="nav-link ">
+              <a href="{{route('order.index')}}" class="nav-link {{ Request::routeIs('order.index') ? 'active' : '' }}">
                 <i class="fas fa-luggage-cart" style="color: #7039ee;margin-right: 10px"></i>
                 <p>
                   Order
+                  {{--  <span class="right badge badge-danger">New</span>  --}}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('toko')}}" class="nav-link {{ Request::routeIs('toko') ? 'active' : '' }}">
+                <i class="fas fa-laptop-house" style="color: #39ee81;margin-right: 10px"></i>
+                <p>
+                  Toko
                   {{--  <span class="right badge badge-danger">New</span>  --}}
                 </p>
               </a>

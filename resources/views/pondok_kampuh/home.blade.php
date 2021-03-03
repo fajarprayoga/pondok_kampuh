@@ -22,8 +22,8 @@
                                           <div class="col fill_height">
                                                 <div class="home_container d-flex flex-column align-items-center justify-content-start">
                                                       <div class="home_content">
-                                                            <div class="home_title">Pondok Kampuh</div>
-                                                            <div class="home_subtitle">New Arrival</div>
+                                                            <div class="home_title">{{$toko->name}}</div>
+                                                            {{--  <div class="home_subtitle">New Arrival</div>  --}}
                                                             <div class="home_items">
                                                                   <div class="row">
                                                                         <div class="col-sm-3 offset-lg-1">
@@ -31,12 +31,12 @@
                                                                         </div>
                                                                         <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                                                                               <div class="product home_item_large">
-                                                                                    <div class="product_tag d-flex flex-column align-items-center justify-content-center">
+                                                                                    {{--  <div class="product_tag d-flex flex-column align-items-center justify-content-center">
                                                                                           <div>
                                                                                                 <div>from</div>
                                                                                                 <div>$3<span>.99</span></div>
                                                                                           </div>
-                                                                                    </div>
+                                                                                    </div>  --}}
                                                                                     <div class="product_image"><img src="{{asset('ui-toko/images/home_2.jpg')}}" alt=""></div>
                                                                                     <div class="product_content">
                                                                                           <div class="product_info d-flex flex-row align-items-start justify-content-start">
@@ -298,7 +298,7 @@
                   <div class="row page_nav_row">
                         <div class="col">
                               <div class="page_nav text-center">
-                                 <h3 style="color: black">Produk Kita</h3>
+                                 <h3 style="color: black">My Product</h3>
                               </div>
                         </div>
                   </div>
@@ -314,7 +314,7 @@
                                                 <div>
                                                       <div>
                                                             <div class="product_name"><a href="product.html">{{$product->name}}</a></div>
-                                                            <div class="product_category">In <a href="category.html">{{$product->category->name}}</a></div>
+                                                            <div class="product_category"> <a href="category.html">{{$product->category->name}}</a></div>
                                                       </div>
                                                 </div>
                                                 <div class="ml-auto text-right">

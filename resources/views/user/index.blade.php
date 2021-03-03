@@ -28,7 +28,7 @@
         <div class="col-12">      
               <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">DataTable with default features</h3>
+                    <h3 class="card-title">Table Users</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -69,13 +69,13 @@
                             @endif
                           </td>
                           <td>
-                            <form action="{{route('user.destroy', $user->id)}}" method="post">
+                            {{--  <form action="{{route('user.destroy', $user->id)}}" method="post">
                               @csrf
-                              @method('delete')
+                              @method('delete')  --}}
                               <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit-modal{{$user->id}}">Edit</button>
                               {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="">View</button> --}}
-                              <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                              {{--  <button type="submit" onclick="return confirm('Yakin Hapus?')" class="btn btn-danger btn-sm">Delete</button>
+                            </form>  --}}
                           </td>
                         </tr>
                         <?php $no++?>
@@ -90,6 +90,7 @@
                       <th>Phone</th>
                       <th>Roles</th>
                       <th>Status</th>
+                      <th>Option</th>
                     </tr>
                     </tfoot>
                   </table>

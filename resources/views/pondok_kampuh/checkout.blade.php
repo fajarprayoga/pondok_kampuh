@@ -140,7 +140,7 @@
                                           </div>  --}}
                                           <div class="cart_text">
                                                 <p>
-                                                      Silahkan anda lanjutkan ke proses pembayarn saudara {{Auth::user()->name}} and semoga hari anda menyenangkan 
+                                                      Please go through the payment process {{Auth :: user () -> name}} and have a nice day
                                                 </p>
                                           </div>
                                           {{--  <div class="checkout_button" id="checkout" style="font-size: 25px; color: #ffffff;">place order</div>
