@@ -158,35 +158,35 @@ class ProductController extends Controller
             $sizeS->update([
                 'name' => 'S',
                 'product_id'=> $product->id,
-                'stock' => $request->S == null ? 0 : $request->S
+                'stock' => $request->S == null ? $sizeS->stock : $request->S
             ]);
 
             $sizeM = Size::where('product_id', $product->id)->where('name', 'M')->first();
             $sizeM->update([
                 'name' => 'M',
                 'product_id'=> $product->id,
-                'stock' => $request->M == null ? 0 : $request->M
+                'stock' => $request->M == null ? $sizeM->stock : $request->M
             ]);
 
             $sizeL = Size::where('product_id', $product->id)->where('name', 'L')->first();
             $sizeL->update([
                 'name' => 'L',
                 'product_id'=> $product->id,
-                'stock' => $request->L == null ? 0 : $request->L
+                'stock' => $request->L == null ? $sizeL->stock : $request->L
             ]);
 
             $sizeXL = Size::where('product_id', $product->id)->where('name', 'XL')->first();
             $sizeXL->update([
                 'name' => 'XL',
                 'product_id'=> $product->id,
-                'stock' => $request->XL == null ? 0 : $request->XL
+                'stock' => $request->XL == null ? $sizeXL->stock : $request->XL
             ]);
 
             $sizeAllSize = Size::where('product_id', $product->id)->where('name', 'AllSize')->first();
             $sizeAllSize->update([
                 'name' => 'AllSize',
                 'product_id'=> $product->id,
-                'stock' => $request->AllSize == null ? 0 : $request->AllSize
+                'stock' => $request->AllSize == null ? $sizeAllSize->stock : $request->AllSize
             ]);
         }
         return redirect()->back()->with('success', 'Product is updated');

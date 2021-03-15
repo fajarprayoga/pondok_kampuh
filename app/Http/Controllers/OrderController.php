@@ -20,6 +20,7 @@ class OrderController extends Controller
         ->get();
         // return dd($orders[0]->orderDetail[0]->pivot);
         return view('order.index', compact('orders'));
+        dd($orders[0]->orderDetail[0]->size);
     }
 
      // notif order
@@ -45,13 +46,15 @@ class OrderController extends Controller
                     'body' => 'Terimah kasih telah berbelanja di toko kami ' . $order->email ,
                 ];     
                 Mail::to(Auth::user()->email)->send(new \App\Mail\NotifOrder($details));
+                foreach($order->orderDetail as $item){
+                    $product = Product::findOrFail($item->id);
+                    $product->stock =  ($product->stock - $item->pivot->quantity);
+                    $product->save();
+                    $size = Size::findOrFail($item->pivot->size);
+                    $size->stock =  ($size->stock - $item->pivot->quantity);
+                    $size->save();
+                }
             }
-             $product = Product::findOrFail($item['productId']);
-            $product->stock =  ($product->stock - $item['quantity']);
-            $product->save();
-            $size = Size::findOrFail($item['size']);
-            $size->stock =  ($size->stock - $item['quantity']);
-            $size->save();
             return redirect()->back()->with('success', 'Order status is updated');
         }else{
             return redirect()->back()->with('danger', 'Order status is not updated');

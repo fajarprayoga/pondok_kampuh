@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('title')
-     My Toko {{$toko->name}}
+     Marketplace {{$toko->name}}
 @endsection
 @section('content')
       <div class="row" style="padding:10px">

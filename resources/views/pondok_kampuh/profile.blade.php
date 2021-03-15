@@ -44,7 +44,7 @@
                                                     </p>
                                                     @endforeach
                                                 @endif
-                                                <img src="{{asset('ui-toko/images/home.jpg')}}" class="card-img-top mt-2" style="border-radius: 100%; height: 150px; width: 150px;" alt="...">
+                                                {{-- <img src="{{asset('ui-toko/images/home.jpg')}}" class="card-img-top mt-2" style="border-radius: 100%; height: 150px; width: 150px;" alt="..."> --}}
                                                 <div class="card-body col-11">
                                                       <form action="{{route('profile.update', Auth::user()->id)}}" method="POST">
                                                             @method('PUT')

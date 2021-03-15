@@ -9,11 +9,15 @@ use Illuminate\Support\Facades\Session;
 
 class PondokKampuhController extends Controller
 {
-    public function home()
+    public function home(Request $request)
     {
-        $product = Product::where('stock', '>', 0)->where('status', 'ACTIVE')->latest()->paginate(6);
+        if(!empty($request->search)){
+            $product = Product::where('name', 'LIKE', "%$request->search%")->where('stock', '>', 0)->where('status', 'ACTIVE')->latest()->paginate(6);
+        }else{
+            $product = Product::where('stock', '>', 0)->where('status', 'ACTIVE')->latest()->paginate(6);
+        }
+
         return view('pondok_kampuh/home', ['products' => $product]);
-        // return dd($product);
     }
 
     public function produk($slug)

@@ -163,6 +163,7 @@
                                                                         <th>Name</th>
                                                                         <th>Image</th>
                                                                         <th>Category</th>
+                                                                        <th>Size</th>
                                                                         <th>Quantity</th>
                                                                         <th>Weight</th>
                                                                         <th>Price</th>
@@ -177,6 +178,13 @@
                                                                               <td>{{$item->name}}</td>
                                                                               <td><img src="{{asset('storage/'.$item->image[0]->name)}} " alt="" style="width: 50px; height: 50px"></td>
                                                                               <td>{{$item->category->name}}</td>
+                                                                              <td>
+                                                                                    @foreach ($item->size as $size)
+                                                                                        @if ($size->id == $item->pivot->size)
+                                                                                            {{$size->name}}
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                              </td>
                                                                               <td>{{$item->pivot->quantity}}</td>
                                                                               <td>{{$item->weight}}</td>
                                                                               <td>{{rupiah($item->price)}}</td>

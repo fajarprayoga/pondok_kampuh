@@ -29,19 +29,17 @@
 	
 	<!-- Search -->
 	<div class="menu_search">
-		<form action="#" id="menu_search_form" class="menu_search_form">
-			<input type="text" class="search_input" placeholder="Search Item" required="required">
-			<button class="menu_search_button"><img src="{{asset('ui-toko/images/search.png')}}" alt=""></button>
+		<form action="{{route('home')}}" id="menu_search_form" method="GET" class="menu_search_form">
+			{{--  @csrf   --}}
+			<input type="text" class="search_input" placeholder="Search Item" value="{{Request::get('search')}}" name="search">
+			<button type="submit" class="menu_search_button"><img src="{{asset('ui-toko/images/search.png')}}" alt=""></button>
 		</form>
 	</div>
 	<!-- Navigation -->
 	<div class="menu_nav">
 		<ul>
-			<li><a href="#">Women</a></li>
-			<li><a href="#">Men</a></li>
-			<li><a href="#">Kids</a></li>
-			<li><a href="{{route('home')}}" >Home Deco</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="{{route('home')}}" style="color: {{ Request::routeIs('home') || Request::routeIs('/') ? 'aqua' : 'black' }}">Home</a></li>
+			<li><a href="{{route('historyOrder')}}" style="color: {{ Request::routeIs('historyOrder') ? 'aqua' : 'black' }}">History</a></li>
 		</ul>
 	</div>
 	<!-- Contact Info -->
@@ -69,7 +67,7 @@
 		<div class="header_overlay"></div>
 		<div class="header_content d-flex flex-row align-items-center justify-content-start">
 			<div class="logo">
-				<a href="#">
+				<a href="{{route('home')}}">
 					<div class="d-flex flex-row align-items-center justify-content-start">
 						<div><img src="{{asset('storage/'. $toko->logo)}}" style="width: 50px" alt=""></div>
 						<div>{{$toko->name}}</div>
@@ -79,7 +77,7 @@
 			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
-					<li class="{{ Request::routeIs('home') || Request::routeIs('/') ? 'active' : '' }}"><a href="">Home</a></li>
+					<li class="{{ Request::routeIs('home') || Request::routeIs('/') ? 'active' : '' }}"><a href="{{route('home')}}">Home</a></li>
 					{{--  <li><a href="#">Contact</a></li>  --}}
 					<li class="{{ Request::routeIs('historyOrder') ? 'active' : '' }}"><a href="{{route('historyOrder')}}" >History Order</a></li>
 					{{--  <li><a href="#">About</a></li>  --}}
@@ -88,9 +86,10 @@
 			<div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
 				<!-- Search -->
 				<div class="header_search">
-					<form action="#" id="header_search_form">
-						<input type="text" class="search_input" placeholder="Search Item" required="required">
-						<button class="header_search_button"><img src="{{asset('ui-toko/images/search.png')}}" alt=""></button>
+					<form action="{{route('home')}}" id="menu_search_form" method="GET" class="menu_search_form">
+						{{--  @csrf   --}}
+						<input type="text" class="search_input" placeholder="Search Item" value="{{Request::get('search')}}" name="search">
+						<button type="submit" class="menu_search_button"><img src="{{asset('ui-toko/images/search.png')}}" alt=""></button>
 					</form>
 				</div>
 				<!-- User -->
@@ -122,7 +121,7 @@
 						<div class="col-lg-6 footer_col">
 							<div class="footer_about">
 								<div class="footer_logo">
-									<a href="#">
+									<a href="{{route('home')}}">
 										<div class="d-flex flex-row align-items-center justify-content-start">
 											<div class="footer_logo_icon"><img src="{{asset('ui-toko/images/logo_2.png')}}" alt=""></div>
 											<div>{{$toko->name}}</div>

@@ -9,7 +9,7 @@ class OrderDetails extends Model
 {
     use HasFactory;
     // //inisialisasi nama tabel
-    // protected $table = 'images';
+    protected $table = 'orderdetail';
     // //allow tabel yg boleh di isi
     // protected $fillable= ['name', 'product'];
 }

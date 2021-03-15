@@ -39,13 +39,22 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{route('dashboard.index')}}" class="nav-link {{ Request::routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+      <li class="nav-item d-none d-sm-inline-block {{ Request::routeIs('user.index') ? 'active' : '' }}">
+        <a href="{{route('user.index')}}" class="nav-link">User</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">About</a>
+      <li class="nav-item d-none d-sm-inline-block {{ Request::routeIs('product.index') ? 'active' : '' }}">
+        <a href="{{route('product.index')}}" class="nav-link">Product</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block {{ Request::routeIs('category.index') ? 'active' : '' }}">
+        <a href="{{route('category.index')}}" class="nav-link">Category</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block {{ Request::routeIs('order.index') ? 'active' : '' }}">
+        <a href="{{route('order.index')}}" class="nav-link">Order</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block {{ Request::routeIs('toko') ? 'active' : '' }}">
+        <a href="{{route('toko')}}" class="nav-link">Toko</a>
       </li>
     </ul>
 
@@ -195,7 +204,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">{{$toko->name}}</a>.</strong>
+    <strong>Copyright &copy; 2014-2020 <a href="{{route('home')}}">{{$toko->name}}</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.1.0-pre
@@ -222,28 +231,12 @@
 <script src="{{asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{asset('admin/plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('admin/plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
-<script src="{{asset('admin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('admin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('admin/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
-<!-- daterangepicker -->
-<script src="{{asset('admin/plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote -->
-<script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- overlayScrollbars -->
 <script src="{{asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('admin/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('admin/dist/js/pages/dashboard.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="{{asset('admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>

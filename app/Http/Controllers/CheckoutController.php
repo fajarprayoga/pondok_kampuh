@@ -55,7 +55,8 @@ class CheckoutController extends Controller
                     $item['productId'], 
                     [
                         'quantity' => $item['quantity'], 
-                        'price' => $item['price']
+                        'price' => $item['price'],
+                        'size' => $item['size']
                     ]
                         
                 );

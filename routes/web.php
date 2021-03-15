@@ -83,6 +83,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('dashboard', function () {
         return view('dashboard.index');
     });
+
+    Route::post('dashboard-grafik', [DashboardController::class, 'grafik'])->name('dashboard.grafik');
     
     Route::resource('user', UserController::class)->names([
         'index' => 'user.index',

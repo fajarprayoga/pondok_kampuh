@@ -113,7 +113,7 @@
           @csrf
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" placeholder="Name Product" name="name">
+              <input type="text" class="form-control" placeholder="Name Product" name="name">
               <label for="floatingInput">Name</label>
             </div>
             <select class="form-select form-floating mb-3" aria-label="Default select example" name="category">
@@ -123,50 +123,50 @@
               @endforeach
             </select>
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingInput" placeholder="Price Product" name="price">
+              <input type="number" class="form-control" placeholder="Price Product" name="price">
               <label for="floatingInput">Price</label>
             </div>
             {{--  <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingInput" placeholder="Stock Product" name="stock">
+              <input type="number" class="form-control" placeholder="Stock Product" name="stock">
               <label for="floatingInput">Stock</label>
             </div>  --}}
             <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="floatingInput" placeholder="Satuan Gram" name="weight">
+              <input type="number" class="form-control" placeholder="Satuan Gram" name="weight">
               <label for="floatingInput">Weight (gram)</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here"  style="height: 100px" name="description"></textarea>
               <label for="floatingTextarea2">Comments</label>
             </div>
             <div class="form-floating mb-3">
               <div class="form-group">
                 <label for="exampleFormControlFile1">Add Images</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple name="image[]">
+                <input type="file" class="form-control-file" multiple name="image[]">
               </div>
             </div>
             <div class="floating-form mb-3">
               <label for="floatingInput">Size</label>
               <div class="card-body">
                 <div class="row text-center">
-                  <div class="col-2">
+                  <div class="col-4">
                     <label for="floatingInput">S</label>
-                    <input type="text" class="form-control text-center" value="0" name="S">
+                    <input type="number" class="form-control text-center size" placeholder="0" name="S">
                   </div>
-                  <div class="col-2">
+                  <div class="col-4">
                     <label for="floatingInput">M</label>
-                    <input type="text" class="form-control text-center"  value="0" name="M">
+                    <input type="number" class="form-control text-center size"  placeholder="0" name="M">
                   </div>
-                  <div class="col-2">
+                  <div class="col-4">
                     <label for="floatingInput">L</label>
-                    <input type="text" class="form-control text-center"  value="0" name="L">
+                    <input type="number" class="form-control text-center size"  placeholder="0" name="L">
                   </div>
-                  <div class="col-2">
+                  <div class="col-4">
                     <label for="floatingInput">XL</label>
-                    <input type="text" class="form-control text-center"  value="0" name="XL">
+                    <input type="number" class="form-control text-center size"  placeholder="0" name="XL">
                   </div>
-                  <div class="col-3">
+                  <div class="col-4">
                     <label for="floatingInput">All Size</label>
-                    <input type="text" class="form-control text-center"  value="0" name="AllSize">
+                    <input type="number" class="form-control text-center " id="allSize"  placeholder="0" name="AllSize">
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@
             @csrf
             <div class="modal-body">
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="Name Product" name="name" value="{{$product->name}}">
+                <input type="text" class="form-control"  placeholder="Name Product" name="name" value="{{$product->name}}">
                 <label for="floatingInput">Name</label>
               </div>
               <select class="form-select form-floating mb-3" aria-label="Default select example" name="category" value="{{$product->name}}">
@@ -210,25 +210,25 @@
                 @endforeach
               </select>
               <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="floatingInput" placeholder="Price Product" name="price" value="{{$product->price}}">
+                <input type="number" class="form-control"  placeholder="Price Product" name="price" value="{{$product->price}}">
                 <label for="floatingInput">Price</label>
               </div>
               {{--  <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="floatingInput" placeholder="Stock Product" name="stock" value="{{$product->stock}}">
+                <input type="number" class="form-control" placeholder="Stock Product" name="stock" value="{{$product->stock}}">
                 <label for="floatingInput">Stock</label>
               </div>  --}}
               <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="floatingInput" placeholder="Satuan Gram" name="weight" value="{{$product->weight}}">
+                <input type="number" class="form-control" placeholder="Satuan Gram" name="weight" value="{{$product->weight}}">
                 <label for="floatingInput">Weight (gram)</label>
               </div>
               <div class="form-floating mb-3">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="description" >{{$product->description}}</textarea>
+                <textarea class="form-control" placeholder="Leave a comment here"  style="height: 100px" name="description" >{{$product->description}}</textarea>
                 <label for="floatingTextarea2">Comments</label>
               </div>
               <div class="form-floating mb-3">
                 <div class="form-group">
                   <label for="exampleFormControlFile1">Add Images</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple name="image[]">
+                  <input type="file" class="form-control-file"  multiple name="image[]">
                 </div>
               </div>
               <div class="floating-form mb-3">
@@ -236,9 +236,9 @@
                 <div class="card-body">
                   <div class="row text-center">
                     @foreach ($product->size as $size)
-                    <div class="col-2">
-                      <label for="floatingInput">{{$size->name}}</label>
-                      <input type="text" class="form-control text-center" placeholder="0" value="{{$size->stock}}" name="{{$size->name}}">
+                    <div class="col-4">
+                      <label for="floatingInput" >{{$size->name}}</label>
+                      <input type="number" class="form-control text-center {{$size->name == 'AllSize' ? '' : 'size' . $product->id }}" id='size{{$size->name . $product->id}}'  value="{{$size->stock}}" name="{{$size->name}}">
                     </div>
                     @endforeach
                   </div>
@@ -329,4 +329,68 @@
     </div>
   @endforeach
   {{-- modal view batas --}}
+
+  <script>
+    $(document).ready(function(){
+      var allSize = $('#allSize').val()
+
+
+      //SIZE ADD
+      $('#allSize').on('change', function() {
+        allSize = $('#allSize').val()
+        if(allSize > 0){
+          $('.size').attr('disabled', 'disabled');
+          $('[name=S]').val(0)
+          $('[name=M]').val(0)
+          $('[name=L]').val(0)
+          $('[name=XL]').val(0)
+        }else{
+          $('.size').removeAttr('disabled');
+        }
+      });
+
+      $('.size').on('change', function() {
+        if($('[name=S]').val() > 0 || $('[name=M]').val() > 0 || $('[name=L]').val() > 0 || $('[name=XL]').val() > 0){
+          $('#allSize').val(0)
+          $('#allSize').attr('disabled', 'disabled');
+        }else{
+          $('#allSize').removeAttr('disabled');
+        }
+      })
+
+
+      //SIZE EDIT
+      @foreach ($products as $product)
+          if($('#sizeS' + {{$product->id}}).val() > 0 || $('#sizeM' + {{$product->id}}).val() > 0 || $('#sizeL' + {{$product->id}}).val() > 0 || $('#sizeXL' + {{$product->id}}).val() > 0){
+            $('#sizeAllSize' + {{$product->id}}).attr('disabled', 'disabled')
+            $('.size' + {{$product->id}}).removeAttr('disabled');
+          }else if(  $('#sizeAllSize' + {{$product->id}}).val() > 0){
+            $('.size' + {{$product->id}}).attr('disabled', 'disabled')
+            $('#sizeAllSize' + {{$product->id}}).removeAttr('disabled');
+          }
+
+          $('.size' + {{$product->id}}).on('change', function(){
+            if($('#sizeS' + {{$product->id}}).val() > 0 || $('#sizeM' + {{$product->id}}).val() > 0 || $('#sizeL' + {{$product->id}}).val() > 0 || $('#sizeXL' + {{$product->id}}).val() > 0){
+              $('#sizeAllSize' + {{$product->id}}).attr('disabled', 'disabled');
+              $('#sizeAllSize' + {{$product->id}}).val(0)
+            }else{
+              $('#sizeAllSize' + {{$product->id}}).removeAttr('disabled');
+            }
+          })
+
+          $('#sizeAllSize' + {{$product->id}}).on('change', function(){
+            if($('#sizeAllSize' + {{$product->id}}).val() > 0){
+              $('#sizeS' + {{$product->id}}).val(0)
+              $('#sizeM' + {{$product->id}}).val(0)
+              $('#sizeL' + {{$product->id}}).val(0)
+              $('#sizeXL' + {{$product->id}}).val(0)
+              $('.size' + {{$product->id}}).attr('disabled', 'disabled');
+            }else{
+              $('.size' + {{$product->id}}).removeAttr('disabled');
+            }
+          })
+
+      @endforeach
+    })
+  </script>
 @endsection

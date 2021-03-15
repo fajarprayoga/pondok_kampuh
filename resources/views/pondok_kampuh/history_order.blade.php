@@ -96,4 +96,5 @@
       </div>
 </div>
 @endforeach
+<script src="{{asset('ui-toko/js/checkout.js')}}"></script>
 @endsection
