@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
@@ -37,6 +38,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id)->update([
             'status' => $request->status
         ]);
+        $banks = Bank::all();
 
         if($order){
             $order = Order::findOrFail($id);
@@ -44,6 +46,7 @@ class OrderController extends Controller
                 $details = [
                     'title' => 'Orderan sudah diterima dengan code '. $order->code,
                     'body' => 'Terimah kasih telah berbelanja di toko kami ' . $order->email ,
+                    'bank' => null
                 ];     
                 Mail::to(Auth::user()->email)->send(new \App\Mail\NotifOrder($details));
                 foreach($order->orderDetail as $item){
@@ -74,7 +77,7 @@ class OrderController extends Controller
      {
 
         $order = Order::findOrFail($id);
-
+        $banks = Bank::all();
         if($request->image){
             if($order->image != null){
                 Storage::delete('public/'. $order->image);
@@ -90,6 +93,7 @@ class OrderController extends Controller
                 $details = [
                     'title' => 'Verifikasi Bukti Orderan '. $order->code . ' from '. $order->email,
                     'body' => 'Cek Bukti Pembayaran dari orderan dengan code '. $order->code,
+                    'bank' => $banks
                 ];
                        
                 Mail::to('admin@pondok_kampuh.com')->send(new \App\Mail\NotifOrder($details));

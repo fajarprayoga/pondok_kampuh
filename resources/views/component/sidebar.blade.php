@@ -4,6 +4,7 @@
         <img src="{{asset('storage/'. $toko->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{$toko->name}}</span>
       </a>
+      
   
       <!-- Sidebar -->
       <div class="sidebar">
@@ -84,6 +85,15 @@
                 <i class="fas fa-laptop-house" style="color: #39ee81;margin-right: 10px"></i>
                 <p>
                   Toko
+                  {{--  <span class="right badge badge-danger">New</span>  --}}
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('bank.index')}}" class="nav-link {{ Request::routeIs('bank.index') ? 'active' : '' }}">
+                <i class="fas fa-money-check-alt" style="color: #da19d0; margin-right: 10px"></i>
+                <p>
+                   Bank
                   {{--  <span class="right badge badge-danger">New</span>  --}}
                 </p>
               </a>

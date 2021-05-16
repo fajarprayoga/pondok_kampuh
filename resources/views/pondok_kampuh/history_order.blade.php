@@ -59,7 +59,7 @@
                                                 <div class="cart_extra_total_value" style="font-size: 14px">{{rupiah($order->total)}}</div>
                                           </li>
                                     </ul>
-                                    <div class="checkout_button trans_200"><a href="#" data-toggle="modal" data-target="#modalUpload{{$order->id}}">Upload Bukti</a></div>
+                                    <div class="checkout_button trans_200"><a href="#" data-toggle="modal" data-target="#modalUpload{{$order->id}}">Upload File</a></div>
                               </div>
                         </div>
                   </div>

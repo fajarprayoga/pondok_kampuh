@@ -14,105 +14,25 @@
             <div class="home_slider_container">
                   <div class="owl-carousel owl-theme home_slider">
                         
-                        <!-- Slide -->
-                        <div class="owl-item">
-                              <div class="background_image" style="background-image:url({{asset('ui-toko/images/home3.jpg')}})"></div>
-                              <div class="container fill_height">
-                                    <div class="row fill_height">
-                                          <div class="col fill_height">
-                                                <div class="home_container d-flex flex-column align-items-center justify-content-start">
-                                                      <div class="home_content">
-                                                            <div class="home_title">{{$toko->name}}</div>
-                                                            {{--  <div class="home_subtitle">New Arrival</div>  --}}
-                                                            <div class="home_items">
-                                                                  <div class="row">
-                                                                        <div class="col-sm-3 offset-lg-1">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_1.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
-                                                                              <div class="product home_item_large">
-                                                                                    <div class="product_image"><img src="{{asset('ui-toko/images/home_2.jpg')}}" alt=""></div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_3.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>	
-                        </div>
+                        
 
                         <!-- Slide -->
                         <div class="owl-item">
                               <div class="background_image" style="background-image:url({{asset('ui-toko/images/home.jpg')}})"></div>
                               <div class="container fill_height">
                                     <div class="row fill_height">
-                                          <div class="col fill_height">
-                                                <div class="home_container d-flex flex-column align-items-center justify-content-start">
-                                                      <div class="home_content">
-                                                            <div class="home_title">Pondok Kampuh</div>
-                                                            <div class="home_subtitle">New Arrival</div>
-                                                            <div class="home_items">
-                                                                  <div class="row">
-                                                                        <div class="col-sm-3 offset-lg-1">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_5.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
-                                                                              <div class="product home_item_large">
-                                                                                    <div class="product_image"><img src="{{asset('ui-toko/images/product_1.jpg')}}" alt=""></div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_4.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
+                                        <div style="display: flex; width: 100%; align-items: center; justify-content: center;">
+                                            <div style="background-color: rgba(0, 0, 0, 0.685); padding: 5px">
+                                                <p style="font-weight: bold; color: white; font-size: 5vmax">{{$toko->name}}</p>
+                                                {{-- <p></p> --}}
+                                            </div>
+                                        </div>
                                     </div>
                               </div>	
                         </div>
-
-                        <!-- Slide -->
-                        <div class="owl-item">
-                              <div class="background_image" style="background-image:url({{asset('ui-toko/images/home2.jpg')}})"></div>
-                              <div class="container fill_height">
-                                    <div class="row fill_height">
-                                          <div class="col fill_height">
-                                                <div class="home_container d-flex flex-column align-items-center justify-content-start">
-                                                      <div class="home_content">
-                                                            <div class="home_title">Pondok Kampuh</div>
-                                                            <div class="home_subtitle">New Arrival</div>
-                                                            <div class="home_items">
-                                                                  <div class="row">
-                                                                        <div class="col-sm-3 offset-lg-1">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_6.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                        <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
-                                                                              <div class="product home_item_large">
-                                                                                    <div class="product_image"><img src="{{asset('ui-toko/images/product_2.jpg')}}" alt=""></div>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div class="col-sm-3">
-                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_7.jpg')}}" alt=""></a></div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>	
-                        </div>
-
                   </div>
-                  <div class="home_slider_nav home_slider_nav_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                  <div class="home_slider_nav home_slider_nav_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                  {{-- <div class="home_slider_nav home_slider_nav_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+                  <div class="home_slider_nav home_slider_nav_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div> --}}
 
                   <!-- Home Slider Dots -->
                   
@@ -156,17 +76,16 @@
                        @foreach ($products as $product)
                         <div class="col-xl-4 col-md-6">
                               <div class="product">
-                                    <div class="product_image"><img src="{{asset('storage/'.$product->image[0]->name)}}" alt="" style="height: 400px;width: 350px"></div>
+                                    <div class="product_image"><img src="{{asset('storage/'.$product->image[0]->name)}}" alt="" style="height: 400px;width: 100%"></div>
                                     <div class="product_content">
                                           <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                                 <div>
                                                       <div>
-                                                            <div class="product_name"><a href="product.html">{{$product->name}}</a></div>
-                                                            <div class="product_category"> <a href="category.html">{{$product->category->name}}</a></div>
+                                                            <div class="product_name">{{$product->name}}</div>
+                                                            <div class="product_category"> {{$product->category->name}}</div>
                                                       </div>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                      {{--  <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>  --}}
                                                       <div class="product_price text-right">{{rupiah($product->price)}}</span></div>
                                                 </div>
                                           </div>

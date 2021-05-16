@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Little Closet</title>
+<title>{{$toko->name}}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Little Closet template">
@@ -40,6 +40,7 @@
 		<ul>
 			<li><a href="{{route('home')}}" style="color: {{ Request::routeIs('home') || Request::routeIs('/') ? 'aqua' : 'black' }}">Home</a></li>
 			<li><a href="{{route('historyOrder')}}" style="color: {{ Request::routeIs('historyOrder') ? 'aqua' : 'black' }}">History</a></li>
+			<li><a href="{{route('bank.show', 1)}}" style="color: {{ Request::routeIs('bank.show') ? 'aqua' : 'black' }}">Bank</a></li>
 		</ul>
 	</div>
 	<!-- Contact Info -->
@@ -74,12 +75,12 @@
 					</div>
 				</a>	
 			</div>
-			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
 					<li class="{{ Request::routeIs('home') || Request::routeIs('/') ? 'active' : '' }}"><a href="{{route('home')}}">Home</a></li>
 					{{--  <li><a href="#">Contact</a></li>  --}}
 					<li class="{{ Request::routeIs('historyOrder') ? 'active' : '' }}"><a href="{{route('historyOrder')}}" >History Order</a></li>
+					<li><a href="{{route('bank.show', 1)}}" style="color: {{ Request::routeIs('bank') ? 'aqua' : 'black' }}">Bank</a></li>
 					{{--  <li><a href="#">About</a></li>  --}}
 				</ul>
 			</nav>
@@ -102,6 +103,7 @@
 					<div>+1 912-252-7350</div>
 				</div>  --}}
 			</div>
+			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 		</div>
 	</header>
 
@@ -140,7 +142,7 @@
 								<div class="footer_title">Stay in Touch</div>
 								<div class="newsletter">
 									<form action="#" id="newsletter_form" class="newsletter_form">
-										<input type="email" class="newsletter_input" placeholder="Subscribe to our Newsletter" required="required">
+										<input type="email" class="newsletter_input" placeholder="Subscribe to our Newsl 	etter" required="required">
 										<button class="newsletter_button">+</button>
 									</form>
 								</div>
@@ -153,8 +155,9 @@
 								<div class="footer_menu" style="margin: auto">
 									<div class="footer_title">Social</div>
 									<ul class="footer_social_list d-flex flex-row align-items-start justify-content-start">
-										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+										<li><a href="{{$toko->facebook !== '' ? $toko->facebook : '#'}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+										<li><a href="{{$toko->instagram !== '' ? $toko->instagram : '#'}}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+										<li><a href="{{$toko->twitter !== '' ? $toko->twitter : '#'}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 									</ul>
 								</div>
 							{{--  </div>  --}}

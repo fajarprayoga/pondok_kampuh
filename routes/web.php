@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -118,6 +119,14 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
         // 'create' => 'profile.store',
         'update' => 'profile.update',
         // 'delete' => 'profile.destroy'
+    ]); 
+
+    Route::resource('bank', BankController::class)->names([
+        'index' => 'bank.index',
+        'create' => 'bank.store',
+        'update' => 'bank.update',
+        'delete' => 'bank.destroy',
+        'show' => 'bank.show'
     ]); 
 
     Route::get('home/cart',[ CartController::class, 'cart'])->name('cart');
