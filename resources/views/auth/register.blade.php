@@ -22,7 +22,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body" >
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Sign up to start your session</p>
       @if (count($errors) > 0)
       @foreach ($errors->all() as $error)
           <p class="login-box-msg">

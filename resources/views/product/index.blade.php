@@ -31,7 +31,7 @@
                         <h3 class="card-title">Table Products</h3>
                         <button style="float: right" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal">Add Product</button>
                         <a href="{{route('product.report')}}" class="btn btn-primary float-right" style="margin-right: 5px;">
-                          <i class="fas fa-download"></i> Generate PDF
+                          <i class="fas fa-download"></i> PDF
                         </a>
                       </div>
                     <!-- /.card-header -->
@@ -204,9 +204,9 @@
                 <input type="text" class="form-control"  placeholder="Name Product" name="name" value="{{$product->name}}">
                 <label for="floatingInput">Name</label>
               </div>
-              <select class="form-select form-floating mb-3" aria-label="Default select example" name="category" value="{{$product->name}}">
+              <select class="form-select form-floating mb-3" aria-label="Default select example" name="category">
                 @foreach ($categories as $category)
-                  <option value="{{$category->id}} {{$category->id === $product->category_id ? 'selected' : ''}}">{{$category->name}}</option>
+                  <option value="{{$category->id}} {{$category->id == $product->category_id ? 'selected' : ''}}">{{$category->name}}</option>
                 @endforeach
               </select>
               <div class="form-floating mb-3">

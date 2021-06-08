@@ -25,9 +25,35 @@
                   <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">DataTable order</h3>
-                        <a href="{{route('order.report')}}" class="btn btn-primary float-right" style="margin-right: 5px;">
-                              <i class="fas fa-download"></i> Generate PDF
-                        </a>
+                        <div class="pull-right " >
+                        <form action="{{route('order.report')}}" method="post">
+                              @csrf
+                             <div class="row justify-content-end">
+                                   <div class="col-md-3">
+                                          <div class="form-group">
+                                                <select name="filter" id="Filter" class="filter form-control w-100">
+                                                      <option value=""></option>
+                                                      <option value="1">Last 7 Days</option>
+                                                      <option value="2">Last 30 Days</option>
+                                                      <option value="3" selected>This Month</option>
+                                                      <option value="4">Last Month</option>
+                                                </select>
+                                          </div>
+                                   </div>
+                                   <div class="col-md-3">
+                                          <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-download"></i> PDF
+                                          </button>
+                                   </div>
+                             </div>   
+                        </form>
+                  </div>
+                        {{--  <div class="col-12">
+                              <div class="row">
+                                    <div class="col-6"></div>
+                                    <div class="col-6"></div>
+                              </div>
+                        </div>  --}}
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -269,7 +295,7 @@
                         </div>
                         <div class="modal-footer">
                               <button type="button" class="btn btn-secondary reloadPage" data-bs-dismiss="modal">Close</button>
-                              {{--  <button type="submit" class="btn btn-primary">Save changes</button>  --}}
+                              <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                   </form>
                   </div>

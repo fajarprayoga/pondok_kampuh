@@ -56,7 +56,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-update{{$category->id}}">Edit</button>
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Hapus?')">Delete</button>
+                                                {{--  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Hapus?')">Delete</button>  --}}
                                            </form>
                                     </td>
                               </tr>

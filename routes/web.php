@@ -155,7 +155,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
     // report
     Route::get('report-stock', [ProductController::class, 'report'])->middleware('can:isAdmin')->name('product.report');
-    Route::get('report-order', [OrderController::class, 'report'])->middleware('can:isAdmin')->name('order.report');
+    Route::post('report-order', [OrderController::class, 'report'])->middleware('can:isAdmin')->name('order.report');
 });
 Route::get('logout',[ AuthController::class, 'logout'])->name('auth.logout');
 

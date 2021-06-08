@@ -6,8 +6,8 @@
 <body>
     <h3>{{ $details['title'] }}</h3>
     <p>{{ $details['body'] }}</p>
+    @if ($details['bank'] != null)
     <p>Silahkan Transfer di pilihan bank di bawah ini</p>
-    @if ($details['bank'] !== null)
         <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>

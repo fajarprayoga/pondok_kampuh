@@ -74,7 +74,7 @@
                                                 </div>  --}}
                                                 <div>
                                                       <!-- Country -->
-                                                      <textarea class="checkout_input" style="padding: 15px 20px" name="address" id="address" cols="30" rows="10" placeholder="jl.baturaya no 9 desa mengwi"></textarea>
+                                                      <textarea class="checkout_input" style="padding: 15px 20px" name="address" id="address" cols="30" rows="10" placeholder="Alamat Anda"></textarea>
                                                 </div>
                                                 <div>
                                                       <!-- Zipcode -->

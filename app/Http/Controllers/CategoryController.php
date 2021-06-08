@@ -82,7 +82,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|min:3:unique:products,name,' . $id, 
+            'name' => 'required|min:3'
         ]);
 
         $data =[

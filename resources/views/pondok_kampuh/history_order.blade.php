@@ -84,7 +84,7 @@
                         <div class="modal-body">
                               <div class="form-group">
                                     <label for="exampleFormControlFile1">Pilih Butkti Transfer</label>
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" required>
                               </div>
                         </div>
                         <div class="modal-footer">

@@ -57,7 +57,7 @@
                                           </div>
                                     </div>
                                     <div class="form-group">
-                                          <label>Textarea</label>
+                                          <label>Location</label>
                                           <textarea class="form-control" rows="3" placeholder="Enter your address ..." name="address">{{$toko->address}}</textarea>
                                     </div>
                                     <div class="form-group">

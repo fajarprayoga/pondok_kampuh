@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -44,9 +46,9 @@ class OrderController extends Controller
             $order = Order::findOrFail($id);
             if($order->status == 'SUCCESS'){
                 $details = [
-                    'title' => 'Orderan sudah diterima dengan code '. $order->code,
+                    'title' => 'Orderan sudah sampai dengan code  '. $order->code,
                     'body' => 'Terimah kasih telah berbelanja di toko kami ' . $order->email ,
-                    'bank' => null
+                    // 'bank' => $banks
                 ];     
                 Mail::to(Auth::user()->email)->send(new \App\Mail\NotifOrder($details));
                 foreach($order->orderDetail as $item){
@@ -93,7 +95,7 @@ class OrderController extends Controller
                 $details = [
                     'title' => 'Verifikasi Bukti Orderan '. $order->code . ' from '. $order->email,
                     'body' => 'Cek Bukti Pembayaran dari orderan dengan code '. $order->code,
-                    'bank' => $banks
+                    'bank' => null
                 ];
                        
                 Mail::to('admin@pondok_kampuh.com')->send(new \App\Mail\NotifOrder($details));
@@ -114,12 +116,41 @@ class OrderController extends Controller
          return redirect()->back()->with('success', 'Order deleted');
      }
 
-     public function report()
+     public function report(Request $request)
      {
-        $orders = Order::where('status', 'SUCCESS')->with('customer')
-        ->with('orderDetail')
-        ->latest()
-        ->get();
-         return view('order.report', compact('orders'));
+        // $orders = Order::where('status', 'SUCCESS')->with('customer')
+        // ->with('orderDetail')
+        // ->latest()
+        // ->get();
+        //  return view('order.report', compact('orders'));
+
+        
+        if($request->filter == 1){
+            $orders = Order::with('customer')
+            ->with('orderDetail')
+            ->latest()
+            ->whereDate('created_at', '>', Carbon::now()->subDays(7))
+            ->get();
+        }else if($request->filter == 2){
+            $orders = Order::with('customer')
+            ->with('orderDetail')
+            ->latest()
+            ->whereDate('created_at', '>', Carbon::now()->subDays(30))
+            ->get();
+        }else if($request->filter == 3){
+            $orders = Order::with('customer')
+            ->with('orderDetail')
+            ->latest()
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->get();
+        }else if($request->filter == 4){
+            $orders = Order::with('customer')
+            ->with('orderDetail')
+            ->latest()
+            ->whereDate('created_at', '>', Carbon::now()->subMonth()->month)
+            ->get();
+        }
+        $pdf = PDF::loadView('order.report', compact('orders'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
      }
 }

@@ -59,7 +59,7 @@
                                                                         <div><div class="product_image"><img src="{{asset('storage/'.$cart['image'])}}" alt=""></div></div>
                                                                         <div class="product_name_container">
                                                                               <div class="product_name"><a href="product.html">{{$cart['name']}}</a></div>
-                                                                              <div class="product_text">Second line for additional info</div>
+                                                                              {{--  <div class="product_text">Second line for additional info</div>  --}}
                                                                         </div>
                                                                   </div>
                                                                   {{--  <div class="product_color product_text"><span>Color: </span>beige</div>  --}}

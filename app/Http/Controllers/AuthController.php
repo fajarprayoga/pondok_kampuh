@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if(Auth::user()->status == 'ACTIVE'){
-                $request->session()->regenerate();
+                // $request->session()->regenerate();
                 if(Auth::user()->roles == 'ADMIN'){
                     return redirect()->intended('dashboard');
                 }else{

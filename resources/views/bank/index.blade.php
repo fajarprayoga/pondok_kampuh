@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 @section('title')
-     Category
+     Bank
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
             <div class="col-12">      
                   <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable Category</h3>
+                        <h3 class="card-title">DataTable Bank</h3>
                         <button style="float: right" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-create">Add Bank</button>
                     </div>
                     <!-- /.card-header -->

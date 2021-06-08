@@ -12,8 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
-
-use function App\Helpers\rupiah;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -119,7 +118,7 @@ class ProductController extends Controller
 
         $data = [
             "name" => $request->name,
-            "category" => $request->category,
+            "category_id" => $request->category,
             "price" => $request->price,
             'stock' => ($request->S + $request->M + $request->L + $request->XL + $request->AllSize ),
             'weight' => $request->weight,
@@ -190,6 +189,7 @@ class ProductController extends Controller
             ]);
         }
         return redirect()->back()->with('success', 'Product is updated');
+        // dd($request->category);
     }
 
     public function destroy($id)
@@ -209,6 +209,8 @@ class ProductController extends Controller
     public function report()
     {
         $products = Product::all();
-        return view('product.report', compact('products'));
+        // return view('product.report', compact('products'));
+        $pdf = PDF::loadView('product.report', compact('products'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 }

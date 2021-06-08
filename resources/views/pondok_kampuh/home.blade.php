@@ -1,5 +1,24 @@
 @extends('pondok_kampuh/global')
 @section('content')
+
+      <style>
+            @media screen and (max-width : 415px){
+                  .home-responsive : {
+                        align-items: center;
+                        justify-content: center ;     
+                        background-size: 75% 50%;
+                  }
+                  .gambar-responsive {
+                        display: none;
+                  }
+                  .home {
+                        height : 50vh;
+                  }
+                  .product_price {
+                        font-size: 5vw;
+                  }
+            }
+      </style>
       <!-- Home -->
       <div class="home">
             <div class="col-12" style="padding:10px">
@@ -10,49 +29,49 @@
                   </div>
                   @endif
             </div>
-            <!-- Home Slider -->
-            <div class="home_slider_container">
-                  <div class="owl-carousel owl-theme home_slider">
-                        
-                        
+            {{--  {{dd($countOrder[0]->id)}}  --}}
+            {{--  <?php $countOrderNew = 0?>
+            @foreach ($countOrder as $item)
+                @if($item->users_id === Auth::user()->id)
+                  <?php$countOrderNew ++?>
+                @endif
+            @endforeach  --}}
 
+            <!-- Home Slider -->
+            <div class="home_slider_container ">
+                  <div class="owl-carousel owl-theme home_slider">
                         <!-- Slide -->
                         <div class="owl-item">
                               <div class="background_image" style="background-image:url({{asset('ui-toko/images/home.jpg')}})"></div>
                               <div class="container fill_height">
                                     <div class="row fill_height">
-                                        <div style="display: flex; width: 100%; align-items: center; justify-content: center;">
-                                            <div style="background-color: rgba(0, 0, 0, 0.685); padding: 5px">
-                                                <p style="font-weight: bold; color: white; font-size: 5vmax">{{$toko->name}}</p>
-                                                {{-- <p></p> --}}
-                                            </div>
-                                        </div>
+                                          <div class="col fill_height">
+                                                <div class="home_container d-flex flex-column align-items-center justify-content-start ">
+                                                      <div class="home_content ">
+                                                            <div class="home_title">{{$toko->name}}</div>
+                                                            <div class="home_subtitle" style="font-weight: bold">Hi, {{ucfirst(Auth::user()->name)}}!</div>
+                                                            <div class="home_items">
+                                                                  <div class="row">
+                                                                        <div class="col-sm-3 offset-lg-1">
+                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/home_7.jpg')}}" alt=""></a></div>
+                                                                        </div>
+                                                                        <div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0 gambar-responsive" >
+                                                                              <div class="product home_item_large">
+                                                                                    <div class="product_image"><img src="{{asset('ui-toko/images/home_6.jpg')}}" alt=""></div>
+                                                                              </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                              <div class="home_item_side"><a href="product.html"><img src="{{asset('ui-toko/images/product_2.jpg')}}" alt=""></a></div>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
                                     </div>
                               </div>	
                         </div>
                   </div>
-                  {{-- <div class="home_slider_nav home_slider_nav_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                  <div class="home_slider_nav home_slider_nav_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div> --}}
-
-                  <!-- Home Slider Dots -->
-                  
-                  <div class="home_slider_dots_container">
-                        <div class="container">
-                              <div class="row">
-                                    <div class="col">
-                                          <div class="home_slider_dots">
-                                                <ul id="home_slider_custom_dots" class="home_slider_custom_dots d-flex flex-row align-items-center justify-content-center">
-                                                      <li class="home_slider_custom_dot active">01</li>
-                                                      <li class="home_slider_custom_dot">02</li>
-                                                      <li class="home_slider_custom_dot">03</li>
-                                                      <li class="home_slider_custom_dot">04</li>
-                                                </ul>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>	
-                  </div>
-
             </div>
       </div>
 
@@ -60,7 +79,7 @@
             <div class="container">
                   <div class="row">
                         <div class="col-lg-6 offset-lg-3">
-                              <div class="section_title text-center">Pondok Kampuh</div>
+                              <div class="section_title text-center">{{$toko->name}}</div>
                         </div>
                   </div>
                   <div class="row page_nav_row">
@@ -76,7 +95,7 @@
                        @foreach ($products as $product)
                         <div class="col-xl-4 col-md-6">
                               <div class="product">
-                                    <div class="product_image"><img src="{{asset('storage/'.$product->image[0]->name)}}" alt="" style="height: 400px;width: 100%"></div>
+                                    <div class="product_image"><img src="{{asset('storage/'.$product->image[0]->name)}}" alt="" style="height: 300px;width: 100%"></div>
                                     <div class="product_content">
                                           <div class="product_info d-flex flex-row align-items-start justify-content-start">
                                                 <div>
@@ -86,7 +105,7 @@
                                                       </div>
                                                 </div>
                                                 <div class="ml-auto text-right">
-                                                      <div class="product_price text-right">{{rupiah($product->price)}}</span></div>
+                                                      <div class="product_price text-right" >{{rupiah($product->price)}}</span></div>
                                                 </div>
                                           </div>
                                           <div class="product_buttons text-center">

@@ -1,119 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Report Product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+  
+  <!-- Select2 -->
+  {{-- <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script> --}}
+    <style>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('admin/plugins/fontawesome-free/css/all.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('admin/dist/css/adminlte.min.css')}}">
+    *{
+      font-size:13px;
+      font-family: 'CustomFont';
+    }
+    .select2-container--default .select2-selection--single {
+            width: 244.167px;
+        }
+
+        .tr-lokasi{
+            background-
+            color:white;
+            font-size: 15px;
+            text-align: center;
+        }
+        .tr-kategori{
+            background-color: #fdcb6e;
+            color:black;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .thead-dark{
+            background-color: #b2bec3;
+            color: black;
+        }
+        .table {
+        border-collapse: collapse;
+        }
+
+        .table, .th, .td {
+        border: 1px solid black;
+        font-size: 11px;
+        }
+        .tr{
+          border:1px solid #000000;
+        }
+    </style>
 </head>
 <body>
-<div class="wrapper">
-  <!-- Main content -->
-  <section class="invoice">
-    <!-- title row -->
-    <div class="row">
-      <div class="col-12">
-        <h2 class="page-header">
-          <img src="{{asset('storage/'. $toko->logo)}}" alt="{{$toko->name}}" style="width: 100px; height: 100px;"></i> {{$toko->name}}.
-          <small class="float-right">Date: <?php echo date('d-m-Y');;?></small>
-        </h2>
-        <h2>Report Product</h2>
+    
+      <div style="text-align: center;">
+        <u><span style="font-size:19px; font-family: 'CustomFontBold';">Report Product Stock</span></u><br>
+        
       </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    <!-- Table row -->
-    <div class="row">
-      <div class="col-12 table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>No</th>
-            <th>Product</th>
-            <th>S</th>
-            <th>M</th>
-            <th>L</th>
-            <th>XL</th>
-            <th>All Size</th>
-            <th>Stock</th>
-            <th>Price</th>
-          </tr>
-          </thead>
-          <tbody>
-          @foreach ($products as $index => $product)
-            <tr style="color: {{$product->stock <=10 ? 'red' : ''}}">
-                  <td>{{$index+1}}</td>
-                  <td>{{$product->name}}</td>
+      <br>
+      <br>
+      <table>
+        
+        {{--  <tr>
+          <td>Tanggal </td>
+          <td>: {{date('d/m/Y', strtotime($from))}} - {{date('d/m/Y', strtotime($to))}}</td>
+        </tr>  --}}
+        
+        
+      </table>
+      <table  class="table"style="width: 100%; border:1px solid #000000;">
+        <tr class="tr">
+          <td class="th" width="50px" style="text-align: center; font-family: 'CustomFontBold';">No</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">Product</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">S</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">M</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">L</td>
+          <td class="th" style="text-align: center; font-family: 'CustomFontBold';" width="100px">XL</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">All Size</td>
+          <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">Total Stock</td>
+          {{--  <td class="th" width="100px" style="text-align: center; font-family: 'CustomFontBold';">Total</td>  --}}
+        </tr>
+          <?php $no = 1; $total=0?>
+          
+          @foreach($products as $index => $product)
+            {{--  @php
+                $total += $value->nominal;
+            @endphp  --}}
+              <tr class="tr" style=border:1px solid #000000;">
+                  <td class="td" style="text-align: center;">
+                      {{$no}}
+                  </td>
+                  <td class="td" style="text-align: center;">
+                    {{$product->name}}
+                  </td>
                   @foreach ($product->size as $size)
-                        <td>{{$size->stock}}</td>
+                    <td class="td" style="text-align: center;" >{{$size->stock}}</td>
                   @endforeach
-                  <td>{{$product->stock}}</td>
-                  <td>{{rupiah($product->price)}}</td>
-            </tr>
+                  </td>
+                  <td class="td" style="text-align: center;" >{{$product->stock}}</td>
+                  {{--  <td class="td" style="text-align: center;" >{{rupiah($product->price)}}</td>  --}}
+              </tr>
+              <?php $no++?>
           @endforeach
-          </tbody>
-        </table>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    {{--  <div class="row">
-      <!-- accepted payments column -->
-      <div class="col-6">
-        <p class="lead">Payment Methods:</p>
-        <img src="../../dist/img/credit/visa.png" alt="Visa">
-        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-        <img src="../../dist/img/credit/american-express.png" alt="American Express">
-        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
-          jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-        </p>
-      </div>
-      <!-- /.col -->
-      <div class="col-6">
-        <p class="lead">Amount Due 2/22/2014</p>
-
-        <div class="table-responsive">
-          <table class="table">
-            <tr>
-              <th style="width:50%">Subtotal:</th>
-              <td>$250.30</td>
-            </tr>
-            <tr>
-              <th>Tax (9.3%)</th>
-              <td>$10.34</td>
-            </tr>
-            <tr>
-              <th>Shipping:</th>
-              <td>$5.80</td>
-            </tr>
-            <tr>
-              <th>Total:</th>
-              <td>$265.24</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <!-- /.col -->
-    </div>  --}}
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
-</div>
-<!-- ./wrapper -->
-<!-- Page specific script -->
-<script>
-  window.addEventListener("load", window.print());
-</script>
+          
+        
+       
+      </table>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+   
 </body>
 </html>
