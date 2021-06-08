@@ -74,15 +74,13 @@
                         <tbody>  
                               <?php $no =1?>
                         @foreach ($orders as $order)
-                              @if($order->image == null || $order->image == '')
+                              {{-- @if($order->image == null || $order->image == '')
                                     <tr style="background-color: {{$order->notif =='NEW'? 'rgb(89, 175, 255)' : 'white'}}">
                               @elseif(($order->image != null || $order->image != '') && $order->notif == 'NEW')
                                     <tr style="background-color: rgb(0, 255, 200)">
-                              @endif
+                              @endif --}}
+                              <tr style="background-color: {{$order->notif =='NEW'? 'rgb(89, 175, 255)' : 'white'}}">
                                     <td>
-                                          {{--  @if ($order->notif =="NEW")
-                                                <span style="color: red; font-size: 20px">*</span>    
-                                          @endif  --}}
                                           {{$no}}
                                     </td>
                                     <td>{{$order->code}}</td>
@@ -295,7 +293,7 @@
                         </div>
                         <div class="modal-footer">
                               <button type="button" class="btn btn-secondary reloadPage" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Save changes</button>
+                              <a  class="btn btn-primary" style="color: white" href="{{asset('storage/'. $order->image)}}" download="TOKEN" ><i class="fa fa-download"></i> Download</a>
                         </div>
                   </form>
                   </div>
